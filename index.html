@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enoch 木瓜的这个暑假 · Summer 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-elevated: #1a1a24;
+      --text: #f0f0f5;
+      --text-muted: #9898a8;
+      --accent: #6c5ce7;
+      --accent2: #00cec9;
+      --accent3: #fd79a8;
+      --gold: #fdcb6e;
+      --green: #00b894;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans SC', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck {
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4vh 6vw;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+      overflow: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      z-index: 10;
+    }
+
+    .slide.exit-up {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+
+    /* Animations for children */
+    .slide.active .anim {
+      animation: fadeUp 0.7s ease both;
+    }
+    .slide.active .anim-d1 { animation-delay: 0.1s; }
+    .slide.active .anim-d2 { animation-delay: 0.2s; }
+    .slide.active .anim-d3 { animation-delay: 0.3s; }
+    .slide.active .anim-d4 { animation-delay: 0.4s; }
+    .slide.active .anim-d5 { animation-delay: 0.5s; }
+    .slide.active .anim-d6 { animation-delay: 0.6s; }
+    .slide.active .anim-d7 { animation-delay: 0.7s; }
+    .slide.active .anim-d8 { animation-delay: 0.8s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(18,18,26,0.85);
+      backdrop-filter: blur(12px);
+      padding: 10px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .nav button {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-size: 18px;
+    }
+    .nav button:hover { background: var(--bg-elevated); color: var(--text); }
+    .nav .page-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 100;
+      transition: width 0.4s ease;
+    }
+
+    /* Typography helpers */
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-top: 0.8rem;
+      max-width: 640px;
+      line-height: 1.6;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108,92,231,0.4);
+    }
+    .card img.icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0.8rem;
+    }
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Stat boxes */
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .stat {
+      text-align: center;
+      min-width: 120px;
+    }
+    .stat .num {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    .stat .desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* Tech tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(108,92,231,0.15);
+      color: #a29bfe;
+      border: 1px solid rgba(108,92,231,0.3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Project layout */
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .project { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .project-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      min-height: 0;
+    }
+
+    /* Browser window mock */
+    .browser-frame {
+      width: fit-content;
+      max-width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+      background: #1c1c24;
+      display: inline-block;
+    }
+    .browser-chrome {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(180deg, #2a2a34 0%, #22222c 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .browser-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .browser-dots .d-red { background: #ff5f57; }
+    .browser-dots .d-yellow { background: #febc2e; }
+    .browser-dots .d-green { background: #28c840; }
+    .browser-urlbar {
+      flex: 1;
+      background: #16161e;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #8888a0;
+      border: 1px solid rgba(255,255,255,0.06);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .browser-urlbar .lock {
+      color: #28c840;
+      margin-right: 4px;
+    }
+    .browser-body {
+      background: #0d0d12;
+      line-height: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .browser-body img {
+      width: auto;
+      max-width: min(480px, 42vw);
+      height: auto;
+      max-height: 520px;
+      display: block;
+      object-fit: contain;
+      object-position: top center;
+    }
+
+    /* Phone device mock */
+    .phone-frame {
+      position: relative;
+      width: min(260px, 42vw);
+      padding: 12px;
+      background: linear-gradient(145deg, #2a2a32 0%, #1a1a22 50%, #121218 100%);
+      border-radius: 36px;
+      box-shadow:
+        0 28px 60px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -1px 0 rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .phone-frame::before {
+      /* side button */
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: 100px;
+      width: 3px;
+      height: 36px;
+      background: #333;
+      border-radius: 0 2px 2px 0;
+    }
+    .phone-frame::after {
+      /* volume buttons */
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 80px;
+      width: 3px;
+      height: 56px;
+      background: #333;
+      border-radius: 2px 0 0 2px;
+      box-shadow: 0 70px 0 #333;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #0a0a0f;
+      border-radius: 20px;
+      z-index: 2;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .phone-notch::after {
+      /* camera dot */
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1a1a28;
+      box-shadow: inset 0 0 0 1.5px #2a3a5a;
+    }
+    .phone-screen {
+      border-radius: 26px;
+      overflow: hidden;
+      background: #000;
+      line-height: 0;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 540px;
+      object-fit: contain;
+      object-position: top center;
+    }
+    .project-info .url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin: 0.5rem 0 1rem;
+    }
+    .project-info .desc {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .bullets {
+      list-style: none;
+      margin: 1rem 0;
+    }
+    .bullets li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+
+    /* Quote */
+    .quote-box {
+      background: linear-gradient(135deg, rgba(108,92,231,0.12), rgba(0,206,201,0.08));
+      border-left: 3px solid var(--accent);
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.5rem 0;
+      max-width: 700px;
+    }
+    .quote-box p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-style: italic;
+      color: var(--text);
+    }
+    .quote-box cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: normal;
+    }
+
+    /* Section divider */
+    .section-num {
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 900;
+      opacity: 0.08;
+      position: absolute;
+      right: 6vw;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      object-fit: contain;
+      max-height: 380px;
+      background: #0d0d12;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover { transform: scale(1.03); }
+
+    /* Cover specific */
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(108,92,231,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(0,206,201,0.15) 0%, transparent 45%),
+        var(--bg);
+      z-index: -1;
+    }
+
+    .cover-title {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .cover-title span {
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* End slide */
+    .end-slide {
+      text-align: center;
+    }
+    .end-slide .heart {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Hint */
+    .hint {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+      z-index: 50;
+      transition: opacity 0.3s;
+    }
+    .hint.hidden { opacity: 0; pointer-events: none; }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .slide { padding: 3vh 4vw; }
+      .stat-row { gap: 1rem; }
+      .card-grid { gap: 0.8rem; }
+    }
+
+    /* Scrollable slides */
+    .slide.scrollable {
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 4vh;
+      padding-bottom: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="deck" id="deck">
+
+    <!-- ========== SLIDE 1: Cover ========== -->
+    <section class="slide active" data-slide="0">
+      <div class="cover-bg"></div>
+      <p class="label anim">S U M M E R &nbsp; 2 0 2 6</p>
+      <h1 class="cover-title anim anim-d1">Enoch 木瓜的<br/><span>这个暑假</span></h1>
+      <p class="subtitle anim anim-d2" style="text-align:center;margin-top:1.5rem;">
+        代码 · 设计 · 竞速 · 探索 —— 一个高中生假期里的自己动手记
+      </p>
+      <div class="stat-row anim anim-d3">
+        <div class="stat">
+          <div class="num">4</div>
+          <div class="desc">个人开发项目</div>
+        </div>
+        <div class="stat">
+          <div class="num">1</div>
+          <div class="desc">场大型黑客松</div>
+        </div>
+        <div class="stat">
+          <div class="num">三等</div>
+          <div class="desc">泉客松获奖</div>
+        </div>
+        <div class="stat">
+          <div class="num">1</div>
+          <div class="desc">枚桨板冠军</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 2: 假期概览 ========== -->
+    <section class="slide scrollable" data-slide="1">
+      <p class="label anim">假期概览</p>
+      <h2 class="title anim anim-d1">这个假期，我都在忙什么</h2>
+      <p class="subtitle anim anim-d2">
+        从写代码到搭网站，从建3D模型到划桨板，从组织一场五百人的黑客松，到带队参加泉客松拿下三等奖。
+      </p>
+      <div class="card-grid anim anim-d3" style="grid-template-columns: repeat(3, 1fr); margin-top: 2.5rem;">
+        <div class="card">
+          <img class="icon" src="media/image1.png" alt="自主开发" />
+          <h3>自主开发</h3>
+          <p>个人博客 · 文学发表站 · 航空爱好站 · 背单词 App</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image2.png" alt="3D 建模" />
+          <h3>3D 建模</h3>
+          <p>为大型活动独立设计场馆导览地图</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image3.png" alt="ShipIt" />
+          <h3>ShipIt 黑客松</h3>
+          <p>组委会成员：3D 地图 · 内容运营 · 赞助对接</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image53.png" alt="泉客松" />
+          <h3>泉客松 · 三等奖</h3>
+          <p>济南主场参赛 · NameFaceAI · 全队平均 16 岁</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image4.png" alt="折腾电脑" />
+          <h3>折腾电脑</h3>
+          <p>老笔记本电脑的 Linux 重生记</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image5.png" alt="桨板竞速" />
+          <h3>桨板竞速</h3>
+          <p>200 米挑战赛，斩获第一名</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image6.png" alt="网络探索" />
+          <h3>网络探索</h3>
+          <p>自建服务，摸索网络与服务器原理</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 3: Section 01 ========== -->
+    <section class="slide" data-slide="2">
+      <div class="section-num">01</div>
+      <p class="label anim">01</p>
+      <h2 class="title anim anim-d1">自己动手开发</h2>
+      <p class="subtitle anim anim-d2">网站与软件</p>
+      <p class="anim anim-d3" style="margin-top:1.5rem;color:var(--text-muted);max-width:500px;text-align:center;line-height:1.7;">
+        四个从零开始的个人项目，每一个都真实上线。
+      </p>
+    </section>
+
+    <!-- ========== SLIDE 4: 个人博客 ========== -->
+    <section class="slide" data-slide="3">
+      <div class="project">
+        <div class="project-info anim">
+          <p class="label">个人网站</p>
+          <h2 class="title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">mugee 的个人博客</h2>
+          <p class="url">blog.mugee.uk</p>
+          <p style="font-style:italic;color:var(--text-muted);margin-bottom:1rem;">写点什么，留给自己看，也留给以后的自己</p>
+          <p class="desc">
+            从零搭建的个人博客网站，用 Hugo 静态网站框架生成页面，用 Git 管理版本、Markdown 写文章，累计提交了 220 余次代码更新——几乎是把它当成一个长期在打理的小家。
+          </p>
+          <ul class="bullets">
+            <li>基于 Hugo 静态站点生成器，构建速度快、部署简单</li>
+            <li>内容全部用 Markdown 撰写，通过 Git 提交记录成长轨迹</li>
+            <li>220+ 次提交，持续迭代页面与功能</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Hugo</span>
+            <span class="tag">Git</span>
+            <span class="tag">Markdown</span>
+            <span class="tag">Arch Linux</span>
+            <span class="tag">Cloudflare</span>
+          </div>
+        </div>
+        <div class="project-visual anim anim-d2">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
+              <div class="browser-urlbar"><span class="lock">🔒</span>blog.mugee.uk</div>
+            </div>
+            <div class="browser-body">
+              <img src="media/image7.png" alt="个人博客截图" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 5: NextWave ========== -->
+    <section class="slide" data-slide="4">
+      <div class="project">
+        <div class="project-info anim">
+          <p class="label">文学发表平台</p>
+          <h2 class="title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">后浪 NextWave</h2>
+          <p class="url">nextwave.mugee.uk</p>
+          <p style="font-style:italic;color:var(--text-muted);margin-bottom:1rem;">“信仰的后浪，青春的发声”</p>
+          <p class="desc">
+            一个面向青少年的文学发表网站，把诗歌、散文、小说分门别类地整理成栏目，任何人都可以通过这个项目来发表自己的作品，是一个真正在运转的青年写作阵地。
+          </p>
+          <ul class="bullets">
+            <li>诗歌 / 散文 / 小说 / 纪实 四大栏目，独立内容目录管理</li>
+            <li>同样基于 Hugo 构建，部署在 Cloudflare Pages 并绑定自定义域名</li>
+            <li>为文章设计了统一的 Front Matter 规范，方便协作发表</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Hugo</span>
+            <span class="tag">Cloudflare Pages</span>
+            <span class="tag">Markdown</span>
+          </div>
+        </div>
+        <div class="project-visual anim anim-d2">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
+              <div class="browser-urlbar"><span class="lock">🔒</span>nextwave.mugee.uk</div>
+            </div>
+            <div class="browser-body">
+              <img src="media/image9.png" alt="后浪 NextWave 截图" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 6: Flying Dreams ========== -->
+    <section class="slide" data-slide="5">
+      <div class="project">
+        <div class="project-info anim">
+          <p class="label">航空爱好者网站</p>
+          <h2 class="title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">Flying Dreams 飞行梦想</h2>
+          <p class="url">flying-dreams.mugee.uk</p>
+          <p style="font-style:italic;color:var(--text-muted);margin-bottom:1rem;">写给所有抬头看飞机的人</p>
+          <p class="desc">
+            一个面向飞机爱好者的作品，首页就是一架可以用鼠标拖拽旋转、滚轮缩放的 3D 客机模型。我做了一个拥有 14 款主流客机专属 3D 模型的机型库，还整理了飞行模拟器下载入口与航空摄影图库。
+          </p>
+          <ul class="bullets">
+            <li>首页交互式 3D 模型：可拖拽旋转、滚轮缩放（React Three Fiber）</li>
+            <li>14 款客机专属 3D 模型库，覆盖空客、波音等主流机型</li>
+            <li>飞行模拟器下载入口 + 航空摄影图库，支持分类筛选</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">React 18</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Three.js</span>
+            <span class="tag">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="project-visual anim anim-d2">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
+              <div class="browser-urlbar"><span class="lock">🔒</span>flying-dreams.mugee.uk</div>
+            </div>
+            <div class="browser-body">
+              <img src="media/image11.png" alt="Flying Dreams 截图" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 7: EnglishWorder ========== -->
+    <section class="slide" data-slide="6">
+      <div class="project">
+        <div class="project-info anim">
+          <p class="label">安卓 App 开发</p>
+          <h2 class="title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">EnglishWorder 背单词</h2>
+          <p style="font-style:italic;color:var(--text-muted);margin:0.5rem 0 1rem;">帮一个阿姨开发的背单词软件</p>
+          <p class="desc">
+            一款安卓背单词 App，支持自建单词表、Excel/CSV 批量导入，还接入了词典接口自动补全音标和释义。背后用的是“艾宾浩斯遗忘曲线”的间隔重复算法，安排每个单词该在什么时候再复习一次。
+          </p>
+          <ul class="bullets">
+            <li>自建单词表 + Excel/CSV 批量导入，支持中英文表头</li>
+            <li>接入词典 API 自动补全音标、释义，还有真人发音朗读</li>
+            <li>基于艾宾浩斯遗忘曲线的间隔重复算法，配合每日提醒推送</li>
+            <li>闯关式复习：选择题、连连看、拼写、消消乐四种玩法</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Kotlin</span>
+            <span class="tag">Jetpack Compose</span>
+            <span class="tag">Room</span>
+            <span class="tag">Hilt</span>
+          </div>
+        </div>
+        <div class="project-visual anim anim-d2">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="media/image13.jpeg" alt="EnglishWorder App" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 泉客松 intro ========== -->
+    <section class="slide" data-slide="7">
+      <div class="section-num">奖</div>
+      <p class="label anim">竞赛 · 泉客松</p>
+      <h2 class="title anim anim-d1">济南主场 · 三等奖</h2>
+      <p class="subtitle anim anim-d2" style="max-width:640px;text-align:center;">
+        参加「泉客松」黑客松，与队友一起做出人脸识别 + AR 展示项目 NameFaceAI，最终拿下三等奖。
+      </p>
+      <div class="stat-row anim anim-d3">
+        <div class="stat">
+          <div class="num">16</div>
+          <div class="desc">全队平均年龄</div>
+        </div>
+        <div class="stat">
+          <div class="num">三等</div>
+          <div class="desc">济南主场获奖</div>
+        </div>
+        <div class="stat">
+          <div class="num">4</div>
+          <div class="desc">人小队</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NameFaceAI 项目 ========== -->
+    <section class="slide scrollable" data-slide="8">
+      <p class="label anim">泉客松 · 项目</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">NameFaceAI · 学生人脸记名系统</h2>
+      <p class="url anim anim-d1" style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:var(--accent2);margin:0.4rem 0 0.8rem;">
+        github.com/ycrrongos/NameFaceAI
+      </p>
+      <p class="subtitle anim anim-d2" style="max-width:720px;">
+        面向教室场景的实时人脸识别与考勤系统：用普通摄像头采集画面，本地 InsightFace 推理识别学生，前端实时标注姓名，并可接入 Rokid 眼镜做 AR 展示。
+      </p>
+      <ul class="bullets anim anim-d3" style="max-width:720px;margin:0.8rem 0 1rem;">
+        <li>浏览器采集摄像头 → InsightFace 推理（独显 / 集显 / CPU 自动选择）→ SQLite 存储 → React 实时标注</li>
+        <li>支持学生录入、名牌 OCR、实时识别考勤、考勤表管理</li>
+        <li>可选 Rokid 眼镜套壳：准星显示姓名；亦可接 LLM 助手生成记忆口诀</li>
+      </ul>
+      <div class="tags anim anim-d3" style="margin-bottom:1.2rem;">
+        <span class="tag">Python</span>
+        <span class="tag">InsightFace</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">React</span>
+        <span class="tag">WebSocket</span>
+        <span class="tag">Rokid</span>
+      </div>
+      <div class="gallery anim anim-d4" style="display:grid;grid-template-columns:1.15fr 0.85fr 0.85fr;gap:0.9rem;max-width:1100px;width:100%;align-items:start;">
+        <div style="text-align:center;">
+          <img src="media/image58.jpg" alt="路演大屏" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">路演：工作原理四步讲解</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image59.jpg" alt="实时识别演示" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">现场实时识别演示</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">赛场开发现场</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 获奖 ========== -->
+    <section class="slide scrollable" data-slide="9">
+      <p class="label anim">泉客松 · 获奖</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">三等奖 · 全队平均 16 岁</h2>
+      <p class="subtitle anim anim-d2" style="max-width:640px;">
+        济南主场，和队友一起站上领奖台。年龄不大，但把一个能跑通的系统从想法做到了现场演示。
+      </p>
+      <div class="gallery anim anim-d3" style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:1100px;width:100%;">
+        <div style="text-align:center;">
+          <img src="media/image57.jpg" alt="参赛合影" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">参赛小队</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image60.jpg" alt="三等奖合影" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">三等奖合影</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image61.jpg" alt="奖杯自拍" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">和奖牌合影</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 8: Section 02 ShipIt ========== -->
+    <section class="slide" data-slide="10">
+      <div class="section-num">02</div>
+      <p class="label anim">02</p>
+      <h2 class="title anim anim-d1">一场大工程：</h2>
+      <h2 class="title anim anim-d1" style="color:var(--accent2);">ShipIt 冬季黑客松</h2>
+      <p class="anim anim-d2" style="margin-top:0.8rem;color:var(--text-muted);font-size:0.95rem;">时间：保密 · 地点：保密</p>
+      <p class="subtitle anim anim-d3" style="max-width:620px;text-align:center;">
+        面向青少年创客的大型科创活动。作为组委会成员之一，我同时横跨三个部门：负责场馆的 3D 地图设计、赛事的内容与叙事运营、企业赞助的资金对接。
+      </p>
+      <div class="stat-row anim anim-d4">
+        <div class="stat">
+          <div class="num">500</div>
+          <div class="desc">参赛者</div>
+        </div>
+        <div class="stat">
+          <div class="num">100+</div>
+          <div class="desc">展位</div>
+        </div>
+        <div class="stat">
+          <div class="num">100+</div>
+          <div class="desc">参赛队伍</div>
+        </div>
+        <div class="stat">
+          <div class="num">90万+</div>
+          <div class="desc">补贴与硬件预算</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 9: 3D 地图 ========== -->
+    <section class="slide scrollable" data-slide="11">
+      <p class="label anim">ShipIt · 3D 地图设计</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">用 Blender 画一张会“导航”的地图</h2>
+      <p class="subtitle anim anim-d2" style="max-width:700px;">
+        大连国际会议中心的场地又大又绕。用 Blender 对场馆进行建模，把开幕式区、工作区、造物所、硬件实验室、展区、能量补给区、医务室等功能分区一一标注清楚，做成一张彩色的三维导览图，让五百名参赛者能在陌生的场馆里快速找到方向。
+      </p>
+      <div class="gallery anim anim-d3" style="margin-top:2rem;grid-template-columns:repeat(3,1fr);gap:1rem;">
+        <div>
+          <img src="media/image14.png" alt="f3 彩色分区导览图" style="object-fit:contain;max-height:340px;width:100%;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">完成稿：f3 彩色分区导览图</p>
+        </div>
+        <div>
+          <img src="media/image15.png" alt="Blender 编辑模式" style="object-fit:contain;max-height:340px;width:100%;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">建模过程：Blender 编辑模式</p>
+        </div>
+        <div>
+          <img src="media/image16.png" alt="f1 导览图" style="object-fit:contain;max-height:340px;width:100%;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">完成稿：f1 导览图</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE: 3D 建模详细过程 ========== -->
+    <section class="slide scrollable" data-slide="12">
+      <p class="label anim">ShipIt · 3D 地图设计</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">建模过程详细记录</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;">
+        从平面图到三维模型，再到分区上色与标注——一次次在 Blender 里推敲布局，并和团队在微信里反复确认细节。
+      </p>
+      <div class="gallery anim anim-d3" style="margin-top:1.5rem;grid-template-columns:repeat(3,1fr);gap:1rem;align-items:start;">
+        <div>
+          <img src="media/image18.png" alt="彩色平面分区图" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">彩色平面分区图</p>
+        </div>
+        <div>
+          <img src="media/image20.png" alt="线稿平面图" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">线稿平面图</p>
+        </div>
+        <div>
+          <img src="media/image19.png" alt="彩色 3D 模型" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">彩色 3D 模型</p>
+        </div>
+        <div>
+          <img src="media/image17.png" alt="Blender 建模过程" style="max-height:380px;object-fit:contain;width:100%;background:#111;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">Blender 建模过程</p>
+        </div>
+        <div>
+          <img src="media/image21.png" alt="带标注导览图" style="max-height:380px;object-fit:contain;width:100%;background:#111;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">带标注导览图</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <img src="media/image22.png" alt="团队沟通" style="max-height:110px;object-fit:contain;width:100%;background:#111;border-radius:8px;" />
+          <img src="media/image23.png" alt="微信确认" style="max-height:110px;object-fit:contain;width:100%;background:#111;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;">团队微信确认</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 10: 叙事部门 ========== -->
+    <section class="slide scrollable" data-slide="13">
+      <p class="label anim">ShipIt · 叙事部门</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">把筹备的故事讲给更多人听</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;">
+        除了画地图，我还参与赛事的叙事部门，负责小红书与微信公众号上的内容运营——把一场活动从策划、招募到开幕的过程写成看得下去的故事，让更多青少年愿意报名参加。
+      </p>
+      <div class="card-grid anim anim-d3" style="grid-template-columns:1fr 1fr;max-width:700px;margin-top:2rem;">
+        <div class="card">
+          <img class="icon" src="media/image24.png" alt="内容运营" />
+          <h3>内容运营</h3>
+          <p>撰写并发布小红书、微信公众号的宣传物料</p>
+        </div>
+        <div class="card">
+          <img class="icon" src="media/image25.png" alt="叙事文案" />
+          <h3>叙事文案</h3>
+          <p>参与公司故事文案的创作与打磨</p>
+        </div>
+      </div>
+      <div class="quote-box anim anim-d4" style="margin-top:2rem;">
+        <p>一个想法只停留在脑子里毫无力量，唯有真正迈出第一步，才有机会让它长成点什么。</p>
+        <cite>—— ShipIt 冬季黑客松 主题精神</cite>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 11: 叙事 真实情况 (photos) ========== -->
+    <section class="slide scrollable" data-slide="14">
+      <p class="label anim">ShipIt · 叙事部门</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">真实情况……</h2>
+      <div class="gallery anim anim-d2" style="margin-top:1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0.9rem;max-width:1100px;width:100%;">
+        <img src="media/image26.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image27.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image28.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image31.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image32.png" alt="运营实况" style="object-fit:contain;max-height:300px;width:100%;background:#111;border-radius:10px;grid-column:span 1;" />
+        <img src="media/image30.png" alt="运营实况" style="object-fit:contain;max-height:220px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image33.png" alt="运营实况" style="object-fit:contain;max-height:180px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image34.png" alt="运营实况" style="object-fit:contain;max-height:160px;width:100%;background:#111;border-radius:10px;" />
+        <!-- 长条截图：通栏放大 -->
+        <img src="media/image29.png" alt="运营实况长条" style="object-fit:contain;width:100%;max-height:140px;background:#111;border-radius:10px;grid-column:1 / -1;" />
+        <img src="media/image35.png" alt="运营实况" style="object-fit:contain;width:100%;max-height:120px;background:#111;border-radius:10px;grid-column:1 / -1;" />
+      </div>
+      <div class="quote-box anim anim-d3" style="margin-top:1.5rem;">
+        <p>一个想法只停留在脑子里无力量，唯有真正迈出第一步，才有机会让它长成点什么。</p>
+        <cite>—— ShipIt 冬季黑客松 主题精神</cite>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 12: 资金部门 ========== -->
+    <section class="slide scrollable" data-slide="15">
+      <p class="label anim">ShipIt · 资金部门</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">去和企业谈一场真正的赞助合作</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;">
+        同时，在资金部门里负责寻找企业赞助、洽谈赞助权益，为选手补贴、硬件采购等预算拉来真金白银的支持——这也是整场活动能顺利落地最实在的一环。
+      </p>
+      <div class="stat-row anim anim-d3">
+        <div class="stat">
+          <div class="num">6</div>
+          <div class="desc">档赞助权益等级<br/>(T1 ~ T6)</div>
+        </div>
+        <div class="stat">
+          <div class="num">150,000</div>
+          <div class="desc">最高单笔赞助额度 (¥)</div>
+        </div>
+        <div class="stat">
+          <div class="num">70万+</div>
+          <div class="desc">选手补贴总预算</div>
+        </div>
+        <div class="stat">
+          <div class="num">30万+</div>
+          <div class="desc">硬件采购总预算</div>
+        </div>
+      </div>
+      <div class="card anim anim-d4" style="max-width:600px;margin-top:2rem;">
+        <h3 style="margin-bottom:0.8rem;">赞助权益覆盖内容（节选）</h3>
+        <ul class="bullets">
+          <li>Logo 多渠道展示</li>
+          <li>赛道冠名评选权</li>
+          <li>宣传片赛时播放</li>
+          <li>赛后纪念书收录</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 13: 资金照片 ========== -->
+    <section class="slide scrollable" data-slide="16">
+      <p class="label anim">ShipIt · 资金部门</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2rem);">赞助与现场</h2>
+      <div class="gallery anim anim-d2" style="margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1100px;width:100%;">
+        <img src="media/image36.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image37.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image38.jpeg" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image39.png" alt="赞助相关" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image41.png" alt="赞助相关" style="object-fit:contain;max-height:360px;width:100%;background:#111;border-radius:10px;" />
+        <img src="media/image42.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
+        <!-- 长条：通栏放大 -->
+        <img src="media/image40.png" alt="赞助相关长条" style="object-fit:contain;width:100%;max-height:160px;background:#111;border-radius:10px;grid-column:1 / -1;" />
+        <img src="media/image43.png" alt="赞助相关长条" style="object-fit:contain;width:100%;max-height:120px;background:#111;border-radius:10px;grid-column:1 / -1;" />
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 14: Section 03 ========== -->
+    <section class="slide" data-slide="17">
+      <div class="section-num">03</div>
+      <p class="label anim">03</p>
+      <h2 class="title anim anim-d1">生活里的小折腾</h2>
+      <p class="subtitle anim anim-d2" style="max-width:560px;text-align:center;">
+        不是所有的动手都轰轰烈烈——捣鼓旧电脑，搭一个自己的网络服务，也是这个假期的一部分。
+      </p>
+    </section>
+
+    <!-- ========== SLIDE 15: 折腾电子设备 ========== -->
+    <section class="slide scrollable" data-slide="18">
+      <p class="label anim">生活折腾</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">折腾电子设备</h2>
+      <p class="subtitle anim anim-d2">
+        捣鼓老电脑，新电脑，自己的电脑，别人的电脑。给手机越狱，尝试不同系统。
+      </p>
+      <div class="gallery anim anim-d3" style="margin-top:2rem;grid-template-columns:repeat(2,1fr);max-width:860px;gap:1.2rem;">
+        <div style="text-align:center;">
+          <img src="media/image44.jpeg" alt="老 Acer 笔记本电脑" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">老 Acer 笔记本电脑</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image45.jpeg" alt="终端电池健康" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">终端里查看电池健康状况</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image46.jpeg" alt="fastboot 模式" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">fastboot 模式</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image47.jpeg" alt="白天 vibe" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">白天 vibe</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 16: 网络服务 ========== -->
+    <section class="slide scrollable" data-slide="19">
+      <p class="label anim">生活折腾</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">顺手搭了一个属于自己的网络服务</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;">
+        借助 Cloudflare 与开源工具 EdgeTunnel，动手搭建、部署并配置了一套网络代理服务，过程中接触了域名解析、节点配置、网络链路测试等一系列网络与服务器运维的知识。
+      </p>
+      <div class="tags anim anim-d3" style="margin:1.5rem 0;">
+        <span class="tag">Cloudflare</span>
+        <span class="tag">EdgeTunnel</span>
+        <span class="tag">服务器部署</span>
+        <span class="tag">网络链路测试</span>
+      </div>
+      <div class="project-visual anim anim-d4" style="max-width:960px;width:100%;">
+        <img src="media/image48.png" alt="自建服务管理面板" style="object-fit:contain;max-height:280px;width:100%;" />
+      </div>
+      <p class="anim anim-d5" style="font-size:0.85rem;color:var(--text-muted);margin-top:0.8rem;">自建服务的管理面板</p>
+    </section>
+
+    <!-- ========== SLIDE 17: 折腾自己电脑 ========== -->
+    <section class="slide scrollable" data-slide="20">
+      <p class="label anim">生活折腾</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">折腾自己电脑</h2>
+      <p class="subtitle anim anim-d2">自定义 slstatus，程序练习，美化电脑，和硬件展开硬战</p>
+      <div class="gallery anim anim-d3" style="margin-top:2rem;display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;max-width:960px;width:100%;align-items:start;">
+        <div style="text-align:center;">
+          <img src="media/image49.png" alt="slstatus 定制" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">slstatus 定制</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image50.jpeg" alt="壁纸统一" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">论为什么壁纸一定要统一：舒服</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image51.png" alt="纯 C 程序练习" style="height:420px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;display:inline-block;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">纯 C 没有 obj · 程序练习</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image52.png" alt="NVIDIA optimus" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">和 NVIDIA 大战三百回合</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SLIDE 18: 桨板竞速 ========== -->
+    <section class="slide scrollable" data-slide="21">
+      <p class="label anim">水上竞技</p>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">桨板赛道上，拿下了第一名</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;">
+        夏天当然不能只有屏幕和代码。
+      </p>
+      <div class="stat-row anim anim-d3" style="margin:1.5rem 0;">
+        <div class="stat">
+          <img src="media/image53.png" alt="奖杯" style="width:48px;height:48px;margin:0 auto 0.5rem;" />
+          <div class="num" style="font-size:2rem;">第一名</div>
+          <div class="desc">200 米竞速挑战赛</div>
+        </div>
+      </div>
+      <div class="gallery anim anim-d4" style="grid-template-columns:1fr 1fr;max-width:860px;gap:1.2rem;">
+        <div style="text-align:center;">
+          <img src="media/image55.jpeg" alt="赛前合影" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">赛前合影</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image56.jpeg" alt="获奖证书与奖牌" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">获奖证书与奖牌</p>
+        </div>
+      </div>
+      <p class="anim anim-d5" style="margin-top:1.5rem;font-style:italic;color:var(--text-muted);text-align:center;">
+        从代码到桨板，动手和拼劲是一体两面的同一件事。
+      </p>
+    </section>
+
+    <!-- ========== SLIDE 19: Ending ========== -->
+    <section class="slide end-slide" data-slide="22">
+      <div class="cover-bg"></div>
+      <div class="heart anim">🛠️</div>
+      <h2 class="title anim anim-d1" style="text-align:center;">愿一直保有这份<br/><span style="background:linear-gradient(135deg,var(--accent2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">“自己动手”的劲头</span></h2>
+      <p class="anim anim-d2" style="margin-top:2rem;color:var(--text-muted);font-size:1.1rem;">
+        Summer 2026 · Enoch 木瓜
+      </p>
+    </section>
+
+  </div>
+
+  <div class="hint" id="hint">← → 或 空格 切换页面 · 点击导航按钮</div>
+
+  <nav class="nav">
+    <button id="prev" aria-label="上一页">‹</button>
+    <span class="page-num" id="pageNum">1 / 23</span>
+    <button id="next" aria-label="下一页">›</button>
+  </nav>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    let current = 0;
+    const progress = document.getElementById('progress');
+    const pageNum = document.getElementById('pageNum');
+    const hint = document.getElementById('hint');
+
+    function goTo(index) {
+      if (index < 0 || index >= total) return;
+      slides[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      // reset scroll on scrollable slides
+      slides[current].scrollTop = 0;
+      progress.style.width = ((current + 1) / total * 100) + '%';
+      pageNum.textContent = (current + 1) + ' / ' + total;
+      if (current > 0) hint.classList.add('hidden');
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        goTo(current + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        goTo(current - 1);
+      } else if (e.key === 'Home') {
+        goTo(0);
+      } else if (e.key === 'End') {
+        goTo(total - 1);
+      }
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(dx) > 60) {
+        if (dx < 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+    }, { passive: true });
+
+    // Wheel navigation (with debounce)
+    let wheelLock = false;
+    document.addEventListener('wheel', (e) => {
+      if (wheelLock) return;
+      const slide = slides[current];
+      if (slide.classList.contains('scrollable')) {
+        const atTop = slide.scrollTop <= 0;
+        const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 5;
+        if (e.deltaY > 0 && !atBottom) return;
+        if (e.deltaY < 0 && !atTop) return;
+      }
+      wheelLock = true;
+      if (e.deltaY > 30) goTo(current + 1);
+      else if (e.deltaY < -30) goTo(current - 1);
+      setTimeout(() => { wheelLock = false; }, 700);
+    }, { passive: true });
+
+    // Init
+    goTo(0);
+  </script>
+</body>
+</html>
