@@ -540,7 +540,6 @@
       background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     /* End slide */
@@ -728,7 +727,7 @@
       <p class="label anim">假期概览</p>
       <h2 class="title anim anim-d1">这个假期，我都在忙什么</h2>
       <p class="subtitle anim anim-d2">
-        从写代码到搭网站，从建3D模型到划桨板，从组织一场五百人的黑客松，到带队参加泉客松拿下三等奖。
+        从写代码到搭网站，从建3D模型到划桨板，从组织黑客松、参加泉客松，到刷机美化、自建网络服务。
       </p>
       <div class="card-grid anim anim-d3" style="grid-template-columns: repeat(3, 1fr); margin-top: 2.5rem;">
         <div class="card">
@@ -753,8 +752,8 @@
         </div>
         <div class="card">
           <img class="icon" src="media/image4.png" alt="折腾电脑" />
-          <h3>折腾电脑</h3>
-          <p>老笔记本电脑的 Linux 重生记</p>
+          <h3>生活折腾</h3>
+          <p>刷机 · 装系统 · 美化桌面 · 老机器重生</p>
         </div>
         <div class="card">
           <img class="icon" src="media/image5.png" alt="桨板竞速" />
@@ -763,8 +762,8 @@
         </div>
         <div class="card">
           <img class="icon" src="media/image6.png" alt="网络探索" />
-          <h3>网络探索</h3>
-          <p>自建服务，摸索网络与服务器原理</p>
+          <h3>自建网络服务</h3>
+          <p>Cloudflare · EdgeTunnel · 链路测试</p>
         </div>
       </div>
     </section>
@@ -926,8 +925,44 @@
     </section>
 
 
-    <!-- ========== 泉客松 intro ========== -->
+    <!-- ========== 自建网络服务 (开发部分) ========== -->
     <section class="slide" data-slide="7">
+      <div class="project">
+        <div class="project-info anim">
+          <p class="label">网络 · 运维</p>
+          <h2 class="title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);">自建网络服务</h2>
+          <p class="subtitle">动手搭一条属于自己的链路</p>
+          <p class="desc">
+            借助 Cloudflare 与开源工具 EdgeTunnel，从零搭建、部署并配置一套网络代理服务。过程中摸清了域名解析、节点配置、链路测试等服务器运维知识——把「能连上」做成「自己可控」。
+          </p>
+          <ul class="bullets">
+            <li>Cloudflare + EdgeTunnel 部署节点，绑定自定义域名</li>
+            <li>配置与调试代理规则，完成端到端链路测试</li>
+            <li>自建管理面板，观察流量与节点状态</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Cloudflare</span>
+            <span class="tag">EdgeTunnel</span>
+            <span class="tag">DNS</span>
+            <span class="tag">服务器运维</span>
+          </div>
+        </div>
+        <div class="project-visual anim anim-d2">
+          <div class="browser-chrome">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">🔒 自建服务管理面板</div>
+            </div>
+            <div class="browser-body">
+              <img src="media/image48.png" alt="自建服务管理面板" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 泉客松 intro ========== -->
+    <section class="slide" data-slide="8">
       <div class="section-num">奖</div>
       <p class="label anim">竞赛 · 泉客松</p>
       <h2 class="title anim anim-d1">济南主场 · 三等奖</h2>
@@ -951,7 +986,7 @@
     </section>
 
     <!-- ========== NameFaceAI 项目 ========== -->
-    <section class="slide scrollable" data-slide="8">
+    <section class="slide scrollable" data-slide="9">
       <p class="label anim">泉客松 · 项目</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">NameFaceAI · 学生人脸记名系统</h2>
       <p class="url anim anim-d1" style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:var(--accent2);margin:0.4rem 0 0.8rem;">
@@ -991,7 +1026,7 @@
 
 
     <!-- ========== SLIDE 8: Section 02 ShipIt ========== -->
-    <section class="slide" data-slide="9">
+    <section class="slide" data-slide="10">
       <div class="section-num">02</div>
       <p class="label anim">02</p>
       <h2 class="title anim anim-d1">一场大工程：</h2>
@@ -1021,7 +1056,7 @@
     </section>
 
     <!-- ========== SLIDE 9: 3D 地图 ========== -->
-    <section class="slide scrollable" data-slide="10">
+    <section class="slide scrollable" data-slide="11">
       <p class="label anim">ShipIt · 3D 地图设计</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">用 Blender 画一张会“导航”的地图</h2>
       <p class="subtitle anim anim-d2" style="max-width:700px;">
@@ -1044,7 +1079,7 @@
     </section>
 
     <!-- ========== SLIDE: 3D 建模详细过程 ========== -->
-    <section class="slide scrollable" data-slide="11">
+    <section class="slide scrollable" data-slide="12">
       <p class="label anim">ShipIt · 3D 地图设计</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">建模过程详细记录</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
@@ -1080,7 +1115,7 @@
     </section>
 
     <!-- ========== SLIDE 10: 叙事部门 ========== -->
-    <section class="slide scrollable" data-slide="12">
+    <section class="slide scrollable" data-slide="13">
       <p class="label anim">ShipIt · 叙事部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">把筹备的故事讲给更多人听</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
@@ -1105,7 +1140,7 @@
     </section>
 
     <!-- ========== 真实情况 collage ========== -->
-    <section class="slide scrollable" data-slide="13">
+    <section class="slide scrollable" data-slide="14">
       <p class="label anim">ShipIt · 叙事部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">真实情况……</h2>
       <div class="collage anim anim-d2" style="min-height:560px;">
@@ -1123,7 +1158,7 @@
     </section>
 
     <!-- ========== 资金部门 ========== -->
-    <section class="slide" data-slide="14">
+    <section class="slide" data-slide="15">
       <p class="label anim">ShipIt · 资金部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);text-align:center;">去和企业谈一场真正的赞助合作</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;text-align:center;margin-left:auto;margin-right:auto;">
@@ -1156,7 +1191,7 @@
     </section>
 
     <!-- ========== 赞助与现场 collage ========== -->
-    <section class="slide scrollable" data-slide="15">
+    <section class="slide scrollable" data-slide="16">
       <p class="label anim">ShipIt · 资金部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2rem);">赞助与现场</h2>
       <div class="collage anim anim-d2" style="min-height:580px;">
@@ -1171,89 +1206,49 @@
       </div>
     </section>
 
-    <!-- ========== SLIDE 14: Section 03 ========== -->
-    <section class="slide" data-slide="16">
-      <div class="section-num">03</div>
-      <p class="label anim">03</p>
-      <h2 class="title anim anim-d1">生活里的小折腾</h2>
-      <p class="subtitle anim anim-d2" style="max-width:560px;text-align:center;">
-        不是所有的动手都轰轰烈烈——捣鼓旧电脑，搭一个自己的网络服务，也是这个假期的一部分。
-      </p>
-    </section>
-
-    <!-- ========== SLIDE 15: 折腾电子设备 ========== -->
+    <!-- ========== 生活折腾 (合并一页) ========== -->
     <section class="slide scrollable" data-slide="17">
       <p class="label anim">生活折腾</p>
-      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">折腾电子设备</h2>
-      <p class="subtitle anim anim-d2">
-        捣鼓老电脑，新电脑，自己的电脑，别人的电脑。给手机越狱，尝试不同系统。
-      </p>
-      <div class="gallery anim anim-d3" style="margin-top:2rem;grid-template-columns:repeat(2,1fr);max-width:860px;gap:1.2rem;">
-        <div style="text-align:center;">
-          <img src="media/image44.jpeg" alt="老 Acer 笔记本电脑" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">老 Acer 笔记本电脑</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image45.jpeg" alt="终端电池健康" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">终端里查看电池健康状况</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image46.jpeg" alt="fastboot 模式" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">fastboot 模式</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image47.jpeg" alt="白天 vibe" style="max-height:400px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">白天 vibe</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== SLIDE 16: 网络服务 ========== -->
-    <section class="slide scrollable" data-slide="18">
-      <p class="label anim">生活折腾</p>
-      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">顺手搭了一个属于自己的网络服务</h2>
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">电子设备与桌面的小实验</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
-        借助 Cloudflare 与开源工具 EdgeTunnel，动手搭建、部署并配置了一套网络代理服务，过程中接触了域名解析、节点配置、网络链路测试等一系列网络与服务器运维的知识。
+        捣鼓老电脑、刷机、装系统、美化桌面——假期里不那么正式、却同样认真的动手时刻。
       </p>
-      <div class="tags anim anim-d3" style="margin:1.5rem 0;">
-        <span class="tag">Cloudflare</span>
-        <span class="tag">EdgeTunnel</span>
-        <span class="tag">服务器部署</span>
-        <span class="tag">网络链路测试</span>
+      <div class="collage anim anim-d3" style="min-height:620px;max-width:1100px;">
+        <img src="media/image64.jpg" alt="Lenovo T61 · Xubuntu" title="ThinkPad T61 装上 Xubuntu，老机器也有新桌面" style="left:1%;top:1%;width:34%;max-height:230px;transform:rotate(-2deg);z-index:4;" />
+        <img src="media/image63.jpg" alt="Acer 传文件" title="红 Acer 与手机互传历史课音频" style="right:2%;top:0%;width:38%;max-height:210px;transform:rotate(2deg);z-index:3;" />
+        <img src="media/image67.jpg" alt="iPad 写代码" title="咖啡厅里用 iPad 写 NextWave" style="left:28%;top:16%;width:26%;max-height:280px;transform:rotate(1deg);z-index:6;" />
+        <img src="media/image65.jpg" alt="强大的木瓜" title="蓝牙传送：强大的木瓜 #110" style="right:4%;top:28%;width:18%;max-height:240px;transform:rotate(-3deg);z-index:5;" />
+        <img src="media/image66.jpg" alt="Kali 安装" title="深夜给笔记本装 Kali Linux" style="left:2%;top:38%;width:20%;max-height:240px;transform:rotate(2deg);z-index:4;" />
+        <img src="media/image44.jpeg" alt="老 Acer" title="老 Acer 笔记本电脑" style="left:22%;top:48%;width:28%;max-height:160px;transform:rotate(-1deg);z-index:3;" />
+        <img src="media/image46.jpeg" alt="fastboot" title="手机 fastboot 模式" style="right:22%;top:52%;width:18%;max-height:180px;transform:rotate(3deg);z-index:5;" />
+        <img src="media/image49.png" alt="slstatus" title="自定义 slstatus 状态栏" style="left:48%;top:42%;width:24%;max-height:140px;transform:rotate(-2deg);z-index:4;" />
+        <img src="media/image51.png" alt="纯 C" title="纯 C 没有 obj · 程序练习" style="left:6%;bottom:4%;width:22%;max-height:150px;transform:rotate(1deg);z-index:5;" />
+        <img src="media/image52.png" alt="NVIDIA" title="和 NVIDIA 大战三百回合" style="left:32%;bottom:6%;width:28%;max-height:120px;transform:rotate(-1deg);z-index:4;" />
+        <img src="media/image50.jpeg" alt="壁纸" title="壁纸统一：看着舒服" style="right:6%;bottom:4%;width:26%;max-height:130px;transform:rotate(2deg);z-index:3;" />
       </div>
-      <div class="project-visual anim anim-d4" style="max-width:960px;width:100%;">
-        <img src="media/image48.png" alt="自建服务管理面板" style="object-fit:contain;max-height:280px;width:100%;" />
-      </div>
-      <p class="anim anim-d5" style="font-size:0.85rem;color:var(--text-muted);margin-top:0.8rem;">自建服务的管理面板</p>
-    </section>
-
-    <!-- ========== SLIDE 17: 折腾自己电脑 ========== -->
-    <section class="slide scrollable" data-slide="19">
-      <p class="label anim">生活折腾</p>
-      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">折腾自己电脑</h2>
-      <p class="subtitle anim anim-d2">自定义 slstatus，程序练习，美化电脑，和硬件展开硬战</p>
-      <div class="gallery anim anim-d3" style="margin-top:2rem;display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;max-width:960px;width:100%;align-items:start;">
-        <div style="text-align:center;">
-          <img src="media/image49.png" alt="slstatus 定制" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">slstatus 定制</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image50.jpeg" alt="壁纸统一" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">论为什么壁纸一定要统一：舒服</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image51.png" alt="纯 C 程序练习" style="height:420px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;display:inline-block;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">纯 C 没有 obj · 程序练习</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="media/image52.png" alt="NVIDIA optimus" style="max-height:360px;width:auto;max-width:100%;object-fit:contain;border-radius:10px;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">和 NVIDIA 大战三百回合</p>
-        </div>
+      <div class="anim anim-d4" style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem;justify-content:center;max-width:900px;margin:1.2rem auto 0;font-size:0.78rem;color:var(--text-muted);">
+        <span>T61 · Xubuntu</span>
+        <span>·</span>
+        <span>Acer 传文件</span>
+        <span>·</span>
+        <span>iPad 写代码</span>
+        <span>·</span>
+        <span>强大的木瓜</span>
+        <span>·</span>
+        <span>Kali 安装</span>
+        <span>·</span>
+        <span>fastboot</span>
+        <span>·</span>
+        <span>slstatus</span>
+        <span>·</span>
+        <span>纯 C 练习</span>
+        <span>·</span>
+        <span>NVIDIA 硬刚</span>
       </div>
     </section>
 
     <!-- ========== 桨板竞速 ========== -->
-    <section class="slide scrollable" data-slide="20">
+    <section class="slide scrollable" data-slide="18">
       <p class="label anim">水上竞技</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">桨板赛道上，拿下了第一名</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
@@ -1282,7 +1277,7 @@
     </section>
 
     <!-- ========== SLIDE 19: Ending ========== -->
-    <section class="slide end-slide" data-slide="21">
+    <section class="slide end-slide" data-slide="19">
       <div class="cover-bg"></div>
       <div class="heart anim">🛠️</div>
       <h2 class="title anim anim-d1" style="text-align:center;">愿一直保有这份<br/><span style="background:linear-gradient(135deg,var(--accent2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">“自己动手”的劲头</span></h2>
@@ -1303,7 +1298,7 @@
 
   <nav class="nav">
     <button id="prev" aria-label="上一页">‹</button>
-    <span class="page-num" id="pageNum">1 / 22</span>
+    <span class="page-num" id="pageNum">1 / 20</span>
     <button id="next" aria-label="下一页">›</button>
   </nav>
 
