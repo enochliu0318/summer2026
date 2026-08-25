@@ -153,12 +153,16 @@
       color: var(--accent2);
       font-weight: 500;
       margin-bottom: 0.6rem;
+      text-align: center;
+      width: 100%;
     }
     .title {
       font-size: clamp(2rem, 5vw, 3.4rem);
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.02em;
+      text-align: center;
+      width: 100%;
     }
     .subtitle {
       font-size: clamp(1rem, 2vw, 1.25rem);
@@ -167,6 +171,9 @@
       margin-top: 0.8rem;
       max-width: 640px;
       line-height: 1.6;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
@@ -257,6 +264,17 @@
       max-width: 1180px;
       width: 100%;
       margin: 0 auto;
+    }
+    .project .label,
+    .project .title {
+      text-align: left;
+      width: auto;
+    }
+    .project .subtitle,
+    .project .desc {
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
     }
     @media (max-width: 900px) {
       .project { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -521,8 +539,8 @@
     .cover-title span {
       background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     /* End slide */
@@ -558,11 +576,119 @@
 
     /* Scrollable slides */
     .slide.scrollable {
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       padding-top: 4vh;
       padding-bottom: 100px;
     }
+    /* Center all direct text blocks inside slides */
+    .slide > .label,
+    .slide > .title,
+    .slide > .subtitle,
+    .slide > .url,
+    .slide > p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .slide > .card-grid,
+    .slide > .stat-row,
+    .slide > .gallery,
+    .slide > .collage,
+    .slide > .project,
+    .slide > .tags,
+    .slide > .quote-box,
+    .slide > .card,
+    .slide > ul.bullets {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .slide > ul.bullets {
+      text-align: left;
+      display: inline-block;
+      max-width: 720px;
+    }
+    .slide > ul.bullets li {
+      text-align: left;
+    }
+
+    /* Polaroid / collage */
+    .collage {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 520px;
+      margin-top: 1rem;
+    }
+    .collage img {
+      position: absolute;
+      border-radius: 8px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+      background: #111;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, z-index 0s;
+    }
+    .collage img:hover {
+      transform: scale(1.06) rotate(0deg) !important;
+      z-index: 20 !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(108,92,231,0.4);
+    }
+
+    /* Clickable images */
+    .slide img:not(.icon) {
+      cursor: zoom-in;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+      padding: 4vh 4vw;
+      cursor: zoom-out;
+    }
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
   </style>
 </head>
 <body>
@@ -849,16 +975,16 @@
       </div>
       <div class="gallery anim anim-d4" style="display:grid;grid-template-columns:1.15fr 0.85fr 0.85fr;gap:0.9rem;max-width:1100px;width:100%;align-items:start;">
         <div style="text-align:center;">
-          <img src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">赛场开发现场</p>
+          <img src="media/image58.jpg" alt="路演大屏" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">路演：工作原理四步讲解</p>
         </div>
         <div style="text-align:center;">
           <img src="media/image59.jpg" alt="实时识别演示" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">现场实时识别演示</p>
         </div>
         <div style="text-align:center;">
-          <img src="media/image58.jpg" alt="路演大屏" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">路演：工作原理四步讲解</p>
+          <img src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">赛场开发现场</p>
         </div>
       </div>
     </section>
@@ -978,79 +1104,70 @@
       </div>
     </section>
 
-    <!-- ========== SLIDE 11: 叙事 真实情况 (photos) ========== -->
+    <!-- ========== 真实情况 collage ========== -->
     <section class="slide scrollable" data-slide="13">
       <p class="label anim">ShipIt · 叙事部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">真实情况……</h2>
-      <div class="gallery anim anim-d2" style="margin-top:1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0.9rem;max-width:1100px;width:100%;">
-        <img src="media/image26.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image27.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image28.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image31.png" alt="运营实况" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image32.png" alt="运营实况" style="object-fit:contain;max-height:300px;width:100%;background:#111;border-radius:10px;grid-column:span 1;" />
-        <img src="media/image30.png" alt="运营实况" style="object-fit:contain;max-height:220px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image33.png" alt="运营实况" style="object-fit:contain;max-height:180px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image34.png" alt="运营实况" style="object-fit:contain;max-height:160px;width:100%;background:#111;border-radius:10px;" />
-        <!-- 长条截图：通栏放大 -->
-        <img src="media/image29.png" alt="运营实况长条" style="object-fit:contain;width:100%;max-height:140px;background:#111;border-radius:10px;grid-column:1 / -1;" />
-        <img src="media/image35.png" alt="运营实况" style="object-fit:contain;width:100%;max-height:120px;background:#111;border-radius:10px;grid-column:1 / -1;" />
-      </div>
-      <div class="quote-box anim anim-d3" style="margin-top:1.5rem;">
-        <p>一个想法只停留在脑子里无力量，唯有真正迈出第一步，才有机会让它长成点什么。</p>
-        <cite>—— ShipIt 冬季黑客松 主题精神</cite>
+      <div class="collage anim anim-d2" style="min-height:560px;">
+        <img src="media/image26.png" alt="运营实况" style="left:2%;top:4%;width:28%;max-height:200px;transform:rotate(-3deg);z-index:3;" />
+        <img src="media/image27.png" alt="运营实况" style="left:28%;top:0%;width:22%;max-height:160px;transform:rotate(2deg);z-index:2;" />
+        <img src="media/image28.png" alt="运营实况" style="right:4%;top:2%;width:24%;max-height:180px;transform:rotate(4deg);z-index:4;" />
+        <img src="media/image32.png" alt="运营实况" style="left:8%;top:28%;width:26%;max-height:220px;transform:rotate(1deg);z-index:5;" />
+        <img src="media/image31.png" alt="运营实况" style="left:36%;top:22%;width:20%;max-height:200px;transform:rotate(-2deg);z-index:3;" />
+        <img src="media/image30.png" alt="运营实况" style="right:8%;top:30%;width:28%;max-height:160px;transform:rotate(3deg);z-index:4;" />
+        <img src="media/image33.png" alt="运营实况" style="left:42%;top:48%;width:30%;max-height:100px;transform:rotate(-1deg);z-index:6;" />
+        <img src="media/image34.png" alt="运营实况" style="left:5%;top:62%;width:22%;max-height:90px;transform:rotate(2deg);z-index:2;" />
+        <img src="media/image29.png" alt="运营实况" style="left:18%;bottom:4%;width:64%;max-height:110px;transform:rotate(-0.5deg);z-index:7;" />
+        <img src="media/image35.png" alt="运营实况" style="right:6%;bottom:8%;width:26%;max-height:80px;transform:rotate(2deg);z-index:5;" />
       </div>
     </section>
 
-    <!-- ========== SLIDE 12: 资金部门 ========== -->
-    <section class="slide scrollable" data-slide="14">
+    <!-- ========== 资金部门 ========== -->
+    <section class="slide" data-slide="14">
       <p class="label anim">ShipIt · 资金部门</p>
-      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">去和企业谈一场真正的赞助合作</h2>
-      <p class="subtitle anim anim-d2" style="max-width:680px;">
-        同时，在资金部门里负责寻找企业赞助、洽谈赞助权益，为选手补贴、硬件采购等预算拉来真金白银的支持——这也是整场活动能顺利落地最实在的一环。
+      <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);text-align:center;">去和企业谈一场真正的赞助合作</h2>
+      <p class="subtitle anim anim-d2" style="max-width:680px;text-align:center;margin-left:auto;margin-right:auto;">
+        负责寻找企业赞助、洽谈赞助权益，为选手补贴与硬件采购拉来真金白银的支持——整场活动能落地最实在的一环。
       </p>
-      <div class="stat-row anim anim-d3">
-        <div class="stat">
-          <div class="num">6</div>
-          <div class="desc">档赞助权益等级<br/>(T1 ~ T6)</div>
+      <div class="anim anim-d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:960px;width:100%;margin:2rem auto 0;">
+        <div class="card" style="text-align:center;padding:1.4rem 1rem;">
+          <div class="num" style="font-size:2.2rem;">6</div>
+          <div class="desc" style="margin-top:0.4rem;">档赞助权益<br/>(T1 ~ T6)</div>
         </div>
-        <div class="stat">
-          <div class="num">150,000</div>
-          <div class="desc">最高单笔赞助额度 (¥)</div>
+        <div class="card" style="text-align:center;padding:1.4rem 1rem;">
+          <div class="num" style="font-size:2rem;">15万</div>
+          <div class="desc" style="margin-top:0.4rem;">最高单笔赞助 (¥)</div>
         </div>
-        <div class="stat">
-          <div class="num">70万+</div>
-          <div class="desc">选手补贴总预算</div>
+        <div class="card" style="text-align:center;padding:1.4rem 1rem;">
+          <div class="num" style="font-size:2.2rem;">70万+</div>
+          <div class="desc" style="margin-top:0.4rem;">选手补贴预算</div>
         </div>
-        <div class="stat">
-          <div class="num">30万+</div>
-          <div class="desc">硬件采购总预算</div>
+        <div class="card" style="text-align:center;padding:1.4rem 1rem;">
+          <div class="num" style="font-size:2.2rem;">30万+</div>
+          <div class="desc" style="margin-top:0.4rem;">硬件采购预算</div>
         </div>
       </div>
-      <div class="card anim anim-d4" style="max-width:600px;margin-top:2rem;">
-        <h3 style="margin-bottom:0.8rem;">赞助权益覆盖内容（节选）</h3>
-        <ul class="bullets">
-          <li>Logo 多渠道展示</li>
-          <li>赛道冠名评选权</li>
-          <li>宣传片赛时播放</li>
-          <li>赛后纪念书收录</li>
-        </ul>
+      <div class="anim anim-d4" style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;max-width:720px;margin:1.8rem auto 0;">
+        <span class="tag">Logo 多渠道展示</span>
+        <span class="tag">赛道冠名评选权</span>
+        <span class="tag">宣传片赛时播放</span>
+        <span class="tag">赛后纪念书收录</span>
       </div>
     </section>
 
-    <!-- ========== SLIDE 13: 资金照片 ========== -->
+    <!-- ========== 赞助与现场 collage ========== -->
     <section class="slide scrollable" data-slide="15">
       <p class="label anim">ShipIt · 资金部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2rem);">赞助与现场</h2>
-      <div class="gallery anim anim-d2" style="margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1100px;width:100%;">
-        <img src="media/image36.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image37.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image38.jpeg" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image39.png" alt="赞助相关" style="object-fit:contain;max-height:280px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image41.png" alt="赞助相关" style="object-fit:contain;max-height:360px;width:100%;background:#111;border-radius:10px;" />
-        <img src="media/image42.png" alt="赞助相关" style="object-fit:contain;max-height:340px;width:100%;background:#111;border-radius:10px;" />
-        <!-- 长条：通栏放大 -->
-        <img src="media/image40.png" alt="赞助相关长条" style="object-fit:contain;width:100%;max-height:160px;background:#111;border-radius:10px;grid-column:1 / -1;" />
-        <img src="media/image43.png" alt="赞助相关长条" style="object-fit:contain;width:100%;max-height:120px;background:#111;border-radius:10px;grid-column:1 / -1;" />
+      <div class="collage anim anim-d2" style="min-height:580px;">
+        <img src="media/image36.png" alt="赞助" style="left:1%;top:2%;width:38%;max-height:240px;transform:rotate(-2deg);z-index:3;" />
+        <img src="media/image37.png" alt="赞助" style="right:2%;top:0%;width:36%;max-height:200px;transform:rotate(3deg);z-index:4;" />
+        <img src="media/image38.jpeg" alt="赞助" style="left:22%;top:18%;width:42%;max-height:220px;transform:rotate(1deg);z-index:5;" />
+        <img src="media/image39.png" alt="赞助" style="left:4%;top:42%;width:32%;max-height:160px;transform:rotate(-3deg);z-index:2;" />
+        <img src="media/image41.png" alt="赞助" style="right:6%;top:38%;width:24%;max-height:240px;transform:rotate(2deg);z-index:6;" />
+        <img src="media/image42.png" alt="赞助" style="left:30%;top:52%;width:36%;max-height:180px;transform:rotate(-1deg);z-index:4;" />
+        <img src="media/image40.png" alt="赞助" style="left:8%;bottom:6%;width:48%;max-height:100px;transform:rotate(1deg);z-index:7;" />
+        <img src="media/image43.png" alt="赞助" style="right:10%;bottom:10%;width:30%;max-height:70px;transform:rotate(-2deg);z-index:5;" />
       </div>
     </section>
 
@@ -1168,7 +1285,7 @@
     <section class="slide end-slide" data-slide="21">
       <div class="cover-bg"></div>
       <div class="heart anim">🛠️</div>
-      <h2 class="title anim anim-d1" style="text-align:center;">愿一直保有这份<br/><span style="background:linear-gradient(135deg,var(--accent2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">“自己动手”的劲头</span></h2>
+      <h2 class="title anim anim-d1" style="text-align:center;">愿一直保有这份<br/><span style="background:linear-gradient(135deg,var(--accent2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">“自己动手”的劲头</span></h2>
       <p class="anim anim-d2" style="margin-top:2rem;color:var(--text-muted);font-size:1.1rem;">
         Summer 2026 · Enoch 木瓜
       </p>
@@ -1177,6 +1294,12 @@
   </div>
 
   <div class="hint" id="hint">← → 或 空格 切换页面 · 点击导航按钮</div>
+
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="关闭">×</button>
+    <img src="" alt="放大预览" id="lightboxImg" />
+  </div>
 
   <nav class="nav">
     <button id="prev" aria-label="上一页">‹</button>
@@ -1208,6 +1331,7 @@
     document.getElementById('next').addEventListener('click', () => goTo(current + 1));
 
     document.addEventListener('keydown', (e) => {
+      if (lightbox && lightbox.classList.contains('open')) return;
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         goTo(current + 1);
@@ -1250,6 +1374,41 @@
       else if (e.deltaY < -30) goTo(current - 1);
       setTimeout(() => { wheelLock = false; }, 700);
     }, { passive: true });
+
+
+    // Lightbox: click any content image to enlarge
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    document.querySelectorAll('.slide img').forEach(img => {
+      if (img.classList.contains('icon')) return;
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openLightbox(img.src);
+      });
+    });
+    lightboxClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeLightbox();
+    });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
 
     // Init
     goTo(0);
