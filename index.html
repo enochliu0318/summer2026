@@ -289,15 +289,63 @@
       min-height: 0;
     }
 
-    /* Browser window mock */
+    /* Browser window mock — live embed */
     .browser-frame {
-      width: fit-content;
+      width: min(520px, 100%);
       max-width: 100%;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
       background: #1c1c24;
-      display: inline-block;
+      display: flex;
+      flex-direction: column;
+    }
+    .browser-frame.live {
+      width: min(560px, 100%);
+    }
+    .browser-body.live-body {
+      position: relative;
+      height: min(52vh, 480px);
+      background: #0d0d12;
+      overflow: hidden;
+    }
+    .browser-body.live-body iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+    .browser-body.live-body .live-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .browser-body.live-body.loaded .live-fallback {
+      display: none;
+    }
+    .browser-open {
+      flex-shrink: 0;
+      margin-left: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #c8c8d8;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .browser-open:hover {
+      background: rgba(108,92,231,0.35);
+      color: #fff;
     }
     .browser-chrome {
       display: flex;
@@ -819,13 +867,15 @@
           </div>
         </div>
         <div class="project-visual anim anim-d2">
-          <div class="browser-frame">
+          <div class="browser-frame live" data-live-url="https://blog.mugee.uk">
             <div class="browser-chrome">
               <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
               <div class="browser-urlbar"><span class="lock">🔒</span>blog.mugee.uk</div>
+              <a class="browser-open" href="https://blog.mugee.uk" target="_blank" rel="noopener">打开 ↗</a>
             </div>
-            <div class="browser-body">
-              <img loading="lazy" decoding="async" src="media/image7.png" alt="个人博客截图" />
+            <div class="browser-body live-body">
+              <img class="live-fallback" src="media/image7.png" alt="个人博客截图" loading="lazy" decoding="async" />
+              <!-- iframe injected when slide is active -->
             </div>
           </div>
         </div>
@@ -855,13 +905,15 @@
           </div>
         </div>
         <div class="project-visual anim anim-d2">
-          <div class="browser-frame">
+          <div class="browser-frame live" data-live-url="https://nextwave.mugee.uk">
             <div class="browser-chrome">
               <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
               <div class="browser-urlbar"><span class="lock">🔒</span>nextwave.mugee.uk</div>
+              <a class="browser-open" href="https://nextwave.mugee.uk" target="_blank" rel="noopener">打开 ↗</a>
             </div>
-            <div class="browser-body">
-              <img loading="lazy" decoding="async" src="media/image9.png" alt="后浪 NextWave 截图" />
+            <div class="browser-body live-body">
+              <img class="live-fallback" src="media/image9.png" alt="后浪 NextWave 截图" loading="lazy" decoding="async" />
+              <!-- iframe injected when slide is active -->
             </div>
           </div>
         </div>
@@ -892,13 +944,15 @@
           </div>
         </div>
         <div class="project-visual anim anim-d2">
-          <div class="browser-frame">
+          <div class="browser-frame live" data-live-url="https://flying-dreams.mugee.uk">
             <div class="browser-chrome">
               <div class="browser-dots"><span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span></div>
               <div class="browser-urlbar"><span class="lock">🔒</span>flying-dreams.mugee.uk</div>
+              <a class="browser-open" href="https://flying-dreams.mugee.uk" target="_blank" rel="noopener">打开 ↗</a>
             </div>
-            <div class="browser-body">
-              <img loading="lazy" decoding="async" src="media/image11.png" alt="Flying Dreams 截图" />
+            <div class="browser-body live-body">
+              <img class="live-fallback" src="media/image11.png" alt="Flying Dreams 截图" loading="lazy" decoding="async" />
+              <!-- iframe injected when slide is active -->
             </div>
           </div>
         </div>
@@ -1220,11 +1274,11 @@
         <img loading="lazy" decoding="async" src="media/image50.jpeg" alt="壁纸" title="壁纸统一：看着舒服" style="right:6%;bottom:4%;width:26%;max-height:130px;transform:rotate(2deg);z-index:3;" />
       </div>
       <div class="anim anim-d4" style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem;justify-content:center;max-width:900px;margin:1.2rem auto 0;font-size:0.78rem;color:var(--text-muted);">
-        <span>Debian</span>
+        <span>T61 · Xubuntu</span>
         <span>·</span>
-        <span>定制 slstatus</span>
+        <span>Acer 传文件</span>
         <span>·</span>
-        <span>随地大小写代码</span>
+        <span>iPad 写代码</span>
         <span>·</span>
         <span>强大的木瓜</span>
         <span>·</span>
@@ -1234,9 +1288,9 @@
         <span>·</span>
         <span>slstatus</span>
         <span>·</span>
-        <span>纯 C 没有 obj</span>
+        <span>纯 C 练习</span>
         <span>·</span>
-        <span>与 f**k NVIDIA 硬刚</span>
+        <span>NVIDIA 硬刚</span>
       </div>
     </section>
 
@@ -1256,12 +1310,12 @@
       </div>
       <div class="anim anim-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:980px;width:100%;align-items:start;">
         <div style="text-align:center;">
-          <video class="media-video" src="media/paddle-fall.mp4" controls playsinline preload="metadata" style="max-height:360px;"></video>
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">训练时掉进水里 💦</p>
-        </div>
-        <div style="text-align:center;">
           <img src="media/image55.jpeg" alt="赛前合影" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px;max-height:360px;object-fit:contain;margin:0 auto;" />
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">赛前合影</p>
+        </div>
+        <div style="text-align:center;">
+          <video class="media-video" src="media/paddle-fall.mp4" controls playsinline preload="metadata" style="max-height:360px;"></video>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">训练时掉进水里 💦</p>
         </div>
         <div style="text-align:center;">
           <img src="media/image56.jpeg" alt="获奖证书与奖牌" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px;max-height:360px;object-fit:contain;margin:0 auto;" />
@@ -1318,6 +1372,7 @@
       pageNum.textContent = (current + 1) + ' / ' + total;
       if (current > 0) hint.classList.add('hidden');
       if (typeof hydrateSlideImages === 'function') hydrateSlideImages(current);
+      if (typeof activateLiveFrames === 'function') activateLiveFrames(slides[current]);
     }
 
     document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
@@ -1368,6 +1423,33 @@
       setTimeout(() => { wheelLock = false; }, 700);
     }, { passive: true });
 
+
+
+    // Live browser embeds — load iframe only when slide is shown
+    function activateLiveFrames(slideEl) {
+      if (!slideEl) return;
+      slideEl.querySelectorAll('.browser-frame.live').forEach(frame => {
+        if (frame.dataset.loaded) return;
+        const url = frame.dataset.liveUrl;
+        const body = frame.querySelector('.live-body');
+        if (!url || !body) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.title = url;
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
+        iframe.addEventListener('load', () => {
+          body.classList.add('loaded');
+        });
+        // If blocked by X-Frame, fallback stays visible
+        setTimeout(() => {
+          // keep fallback if iframe still blank — can't reliably detect XFO
+        }, 3000);
+        body.appendChild(iframe);
+        frame.dataset.loaded = '1';
+      });
+    }
 
     // Lazy: only load nearby slides' images eagerly
     function hydrateSlideImages(idx) {
