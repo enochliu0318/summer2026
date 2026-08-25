@@ -338,17 +338,15 @@
       margin-right: 4px;
     }
     .browser-body {
-      background: #0d0d12;
+      background: transparent;
       line-height: 0;
-      display: flex;
-      justify-content: center;
+      display: block;
     }
     .browser-body img {
-      width: auto;
-      max-width: min(480px, 42vw);
+      width: 100%;
       height: auto;
-      max-height: 520px;
       display: block;
+      max-height: 56vh;
       object-fit: contain;
       object-position: top center;
     }
@@ -424,7 +422,7 @@
       width: 100%;
       height: auto;
       display: block;
-      max-height: 540px;
+      max-height: 56vh;
       object-fit: contain;
       object-position: top center;
     }
@@ -510,12 +508,29 @@
     .gallery img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      border-radius: 10px;
+      border: none;
       object-fit: contain;
-      max-height: 380px;
-      background: #0d0d12;
-      transition: transform 0.3s;
+      max-height: 420px;
+      background: transparent;
+      transition: transform 0.2s;
+      display: block;
+    }
+    .gallery > div {
+      line-height: 0;
+    }
+    .gallery > div > p {
+      line-height: 1.4;
+      margin-top: 0.4rem;
+    }
+    /* media video */
+    .media-video {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 12px;
+      background: #000;
+      display: block;
+      margin: 0 auto;
     }
     .gallery img:hover { transform: scale(1.03); }
 
@@ -810,7 +825,7 @@
               <div class="browser-urlbar"><span class="lock">🔒</span>blog.mugee.uk</div>
             </div>
             <div class="browser-body">
-              <img src="media/image7.png" alt="个人博客截图" />
+              <img loading="lazy" decoding="async" src="media/image7.png" alt="个人博客截图" />
             </div>
           </div>
         </div>
@@ -846,7 +861,7 @@
               <div class="browser-urlbar"><span class="lock">🔒</span>nextwave.mugee.uk</div>
             </div>
             <div class="browser-body">
-              <img src="media/image9.png" alt="后浪 NextWave 截图" />
+              <img loading="lazy" decoding="async" src="media/image9.png" alt="后浪 NextWave 截图" />
             </div>
           </div>
         </div>
@@ -883,7 +898,7 @@
               <div class="browser-urlbar"><span class="lock">🔒</span>flying-dreams.mugee.uk</div>
             </div>
             <div class="browser-body">
-              <img src="media/image11.png" alt="Flying Dreams 截图" />
+              <img loading="lazy" decoding="async" src="media/image11.png" alt="Flying Dreams 截图" />
             </div>
           </div>
         </div>
@@ -917,7 +932,7 @@
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="media/image13.jpeg" alt="EnglishWorder App" />
+              <img loading="lazy" decoding="async" src="media/image13.jpeg" alt="EnglishWorder App" />
             </div>
           </div>
         </div>
@@ -954,7 +969,7 @@
               <div class="browser-url">🔒 自建服务管理面板</div>
             </div>
             <div class="browser-body">
-              <img src="media/image48.png" alt="自建服务管理面板" />
+              <img loading="lazy" decoding="async" src="media/image48.png" alt="自建服务管理面板" />
             </div>
           </div>
         </div>
@@ -1010,15 +1025,15 @@
       </div>
       <div class="gallery anim anim-d4" style="display:grid;grid-template-columns:1.15fr 0.85fr 0.85fr;gap:0.9rem;max-width:1100px;width:100%;align-items:start;">
         <div style="text-align:center;">
-          <img src="media/image58.jpg" alt="路演大屏" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <img loading="lazy" decoding="async" src="media/image58.jpg" alt="路演大屏" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">路演：工作原理四步讲解</p>
         </div>
         <div style="text-align:center;">
-          <img src="media/image59.jpg" alt="实时识别演示" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <img loading="lazy" decoding="async" src="media/image59.jpg" alt="实时识别演示" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">现场实时识别演示</p>
         </div>
         <div style="text-align:center;">
-          <img src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
+          <img loading="lazy" decoding="async" src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">赛场开发现场</p>
         </div>
       </div>
@@ -1064,52 +1079,52 @@
       </p>
       <div class="gallery anim anim-d3" style="margin-top:2rem;grid-template-columns:repeat(3,1fr);gap:1rem;">
         <div>
-          <img src="media/image14.png" alt="f3 彩色分区导览图" style="object-fit:contain;max-height:340px;width:100%;" />
+          <img loading="lazy" decoding="async" src="media/image14.png" alt="f3 彩色分区导览图" style="object-fit:contain;max-height:340px;width:100%;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">完成稿：f3 彩色分区导览图</p>
         </div>
         <div>
-          <img src="media/image15.png" alt="Blender 编辑模式" style="object-fit:contain;max-height:340px;width:100%;" />
+          <img loading="lazy" decoding="async" src="media/image15.png" alt="Blender 编辑模式" style="object-fit:contain;max-height:340px;width:100%;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">建模过程：Blender 编辑模式</p>
         </div>
         <div>
-          <img src="media/image16.png" alt="f1 导览图" style="object-fit:contain;max-height:340px;width:100%;" />
+          <img loading="lazy" decoding="async" src="media/image16.png" alt="f1 导览图" style="object-fit:contain;max-height:340px;width:100%;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;text-align:center;">完成稿：f1 导览图</p>
         </div>
       </div>
     </section>
 
-    <!-- ========== SLIDE: 3D 建模详细过程 ========== -->
+    <!-- ========== 3D 建模详细过程 ========== -->
     <section class="slide scrollable" data-slide="12">
       <p class="label anim">ShipIt · 3D 地图设计</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">建模过程详细记录</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
         从平面图到三维模型，再到分区上色与标注——一次次在 Blender 里推敲布局，并和团队在微信里反复确认细节。
       </p>
-      <div class="gallery anim anim-d3" style="margin-top:1.5rem;grid-template-columns:repeat(3,1fr);gap:1rem;align-items:start;">
+      <div class="anim anim-d3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;max-width:1080px;width:100%;margin-top:1.2rem;">
         <div>
-          <img src="media/image18.png" alt="彩色平面分区图" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">彩色平面分区图</p>
+          <img src="media/image18.png" alt="彩色平面分区图" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">彩色平面分区图</p>
         </div>
         <div>
-          <img src="media/image20.png" alt="线稿平面图" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">线稿平面图</p>
+          <img src="media/image20.png" alt="线稿平面图" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">线稿平面图</p>
         </div>
         <div>
-          <img src="media/image19.png" alt="彩色 3D 模型" style="max-height:300px;object-fit:contain;width:100%;background:#111;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">彩色 3D 模型</p>
+          <img src="media/image19.png" alt="彩色 3D 模型" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">彩色 3D 模型</p>
         </div>
         <div>
-          <img src="media/image17.png" alt="Blender 建模过程" style="max-height:380px;object-fit:contain;width:100%;background:#111;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">Blender 建模过程</p>
+          <img src="media/image17.png" alt="Blender 建模过程" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">Blender 建模过程</p>
         </div>
         <div>
-          <img src="media/image21.png" alt="带标注导览图" style="max-height:380px;object-fit:contain;width:100%;background:#111;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;text-align:center;">带标注导览图</p>
+          <img src="media/image21.png" alt="带标注导览图" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">带标注导览图</p>
         </div>
-        <div style="display:flex;flex-direction:column;gap:0.5rem;">
-          <img src="media/image22.png" alt="团队沟通" style="max-height:110px;object-fit:contain;width:100%;background:#111;border-radius:8px;" />
-          <img src="media/image23.png" alt="微信确认" style="max-height:110px;object-fit:contain;width:100%;background:#111;border-radius:8px;" />
-          <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;">团队微信确认</p>
+        <div>
+          <img src="media/image22.png" alt="团队沟通" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;margin-bottom:0.5rem;" />
+          <img src="media/image23.png" alt="微信确认" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:8px;" />
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;text-align:center;line-height:1.3;">团队微信确认</p>
         </div>
       </div>
     </section>
@@ -1144,16 +1159,16 @@
       <p class="label anim">ShipIt · 叙事部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">真实情况……</h2>
       <div class="collage anim anim-d2" style="min-height:560px;">
-        <img src="media/image26.png" alt="运营实况" style="left:2%;top:4%;width:28%;max-height:200px;transform:rotate(-3deg);z-index:3;" />
-        <img src="media/image27.png" alt="运营实况" style="left:28%;top:0%;width:22%;max-height:160px;transform:rotate(2deg);z-index:2;" />
-        <img src="media/image28.png" alt="运营实况" style="right:4%;top:2%;width:24%;max-height:180px;transform:rotate(4deg);z-index:4;" />
-        <img src="media/image32.png" alt="运营实况" style="left:8%;top:28%;width:26%;max-height:220px;transform:rotate(1deg);z-index:5;" />
-        <img src="media/image31.png" alt="运营实况" style="left:36%;top:22%;width:20%;max-height:200px;transform:rotate(-2deg);z-index:3;" />
-        <img src="media/image30.png" alt="运营实况" style="right:8%;top:30%;width:28%;max-height:160px;transform:rotate(3deg);z-index:4;" />
-        <img src="media/image33.png" alt="运营实况" style="left:42%;top:48%;width:30%;max-height:100px;transform:rotate(-1deg);z-index:6;" />
-        <img src="media/image34.png" alt="运营实况" style="left:5%;top:62%;width:22%;max-height:90px;transform:rotate(2deg);z-index:2;" />
-        <img src="media/image29.png" alt="运营实况" style="left:18%;bottom:4%;width:64%;max-height:110px;transform:rotate(-0.5deg);z-index:7;" />
-        <img src="media/image35.png" alt="运营实况" style="right:6%;bottom:8%;width:26%;max-height:80px;transform:rotate(2deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image26.png" alt="运营实况" style="left:2%;top:4%;width:28%;max-height:200px;transform:rotate(-3deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image27.png" alt="运营实况" style="left:28%;top:0%;width:22%;max-height:160px;transform:rotate(2deg);z-index:2;" />
+        <img loading="lazy" decoding="async" src="media/image28.png" alt="运营实况" style="right:4%;top:2%;width:24%;max-height:180px;transform:rotate(4deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image32.png" alt="运营实况" style="left:8%;top:28%;width:26%;max-height:220px;transform:rotate(1deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image31.png" alt="运营实况" style="left:36%;top:22%;width:20%;max-height:200px;transform:rotate(-2deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image30.png" alt="运营实况" style="right:8%;top:30%;width:28%;max-height:160px;transform:rotate(3deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image33.png" alt="运营实况" style="left:42%;top:48%;width:30%;max-height:100px;transform:rotate(-1deg);z-index:6;" />
+        <img loading="lazy" decoding="async" src="media/image34.png" alt="运营实况" style="left:5%;top:62%;width:22%;max-height:90px;transform:rotate(2deg);z-index:2;" />
+        <img loading="lazy" decoding="async" src="media/image29.png" alt="运营实况" style="left:18%;bottom:4%;width:64%;max-height:110px;transform:rotate(-0.5deg);z-index:7;" />
+        <img loading="lazy" decoding="async" src="media/image35.png" alt="运营实况" style="right:6%;bottom:8%;width:26%;max-height:80px;transform:rotate(2deg);z-index:5;" />
       </div>
     </section>
 
@@ -1195,14 +1210,14 @@
       <p class="label anim">ShipIt · 资金部门</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2rem);">赞助与现场</h2>
       <div class="collage anim anim-d2" style="min-height:580px;">
-        <img src="media/image36.png" alt="赞助" style="left:1%;top:2%;width:38%;max-height:240px;transform:rotate(-2deg);z-index:3;" />
-        <img src="media/image37.png" alt="赞助" style="right:2%;top:0%;width:36%;max-height:200px;transform:rotate(3deg);z-index:4;" />
-        <img src="media/image38.jpeg" alt="赞助" style="left:22%;top:18%;width:42%;max-height:220px;transform:rotate(1deg);z-index:5;" />
-        <img src="media/image39.png" alt="赞助" style="left:4%;top:42%;width:32%;max-height:160px;transform:rotate(-3deg);z-index:2;" />
-        <img src="media/image41.png" alt="赞助" style="right:6%;top:38%;width:24%;max-height:240px;transform:rotate(2deg);z-index:6;" />
-        <img src="media/image42.png" alt="赞助" style="left:30%;top:52%;width:36%;max-height:180px;transform:rotate(-1deg);z-index:4;" />
-        <img src="media/image40.png" alt="赞助" style="left:8%;bottom:6%;width:48%;max-height:100px;transform:rotate(1deg);z-index:7;" />
-        <img src="media/image43.png" alt="赞助" style="right:10%;bottom:10%;width:30%;max-height:70px;transform:rotate(-2deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image36.png" alt="赞助" style="left:1%;top:2%;width:38%;max-height:240px;transform:rotate(-2deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image37.png" alt="赞助" style="right:2%;top:0%;width:36%;max-height:200px;transform:rotate(3deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image38.jpeg" alt="赞助" style="left:22%;top:18%;width:42%;max-height:220px;transform:rotate(1deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image39.png" alt="赞助" style="left:4%;top:42%;width:32%;max-height:160px;transform:rotate(-3deg);z-index:2;" />
+        <img loading="lazy" decoding="async" src="media/image41.png" alt="赞助" style="right:6%;top:38%;width:24%;max-height:240px;transform:rotate(2deg);z-index:6;" />
+        <img loading="lazy" decoding="async" src="media/image42.png" alt="赞助" style="left:30%;top:52%;width:36%;max-height:180px;transform:rotate(-1deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image40.png" alt="赞助" style="left:8%;bottom:6%;width:48%;max-height:100px;transform:rotate(1deg);z-index:7;" />
+        <img loading="lazy" decoding="async" src="media/image43.png" alt="赞助" style="right:10%;bottom:10%;width:30%;max-height:70px;transform:rotate(-2deg);z-index:5;" />
       </div>
     </section>
 
@@ -1214,17 +1229,17 @@
         捣鼓老电脑、刷机、装系统、美化桌面——假期里不那么正式、却同样认真的动手时刻。
       </p>
       <div class="collage anim anim-d3" style="min-height:620px;max-width:1100px;">
-        <img src="media/image64.jpg" alt="Lenovo T61 · Xubuntu" title="ThinkPad T61 装上 Xubuntu，老机器也有新桌面" style="left:1%;top:1%;width:34%;max-height:230px;transform:rotate(-2deg);z-index:4;" />
-        <img src="media/image63.jpg" alt="Acer 传文件" title="红 Acer 与手机互传历史课音频" style="right:2%;top:0%;width:38%;max-height:210px;transform:rotate(2deg);z-index:3;" />
-        <img src="media/image67.jpg" alt="iPad 写代码" title="咖啡厅里用 iPad 写 NextWave" style="left:28%;top:16%;width:26%;max-height:280px;transform:rotate(1deg);z-index:6;" />
-        <img src="media/image65.jpg" alt="强大的木瓜" title="蓝牙传送：强大的木瓜 #110" style="right:4%;top:28%;width:18%;max-height:240px;transform:rotate(-3deg);z-index:5;" />
-        <img src="media/image66.jpg" alt="Kali 安装" title="深夜给笔记本装 Kali Linux" style="left:2%;top:38%;width:20%;max-height:240px;transform:rotate(2deg);z-index:4;" />
-        <img src="media/image44.jpeg" alt="老 Acer" title="老 Acer 笔记本电脑" style="left:22%;top:48%;width:28%;max-height:160px;transform:rotate(-1deg);z-index:3;" />
-        <img src="media/image46.jpeg" alt="fastboot" title="手机 fastboot 模式" style="right:22%;top:52%;width:18%;max-height:180px;transform:rotate(3deg);z-index:5;" />
-        <img src="media/image49.png" alt="slstatus" title="自定义 slstatus 状态栏" style="left:48%;top:42%;width:24%;max-height:140px;transform:rotate(-2deg);z-index:4;" />
-        <img src="media/image51.png" alt="纯 C" title="纯 C 没有 obj · 程序练习" style="left:6%;bottom:4%;width:22%;max-height:150px;transform:rotate(1deg);z-index:5;" />
-        <img src="media/image52.png" alt="NVIDIA" title="和 NVIDIA 大战三百回合" style="left:32%;bottom:6%;width:28%;max-height:120px;transform:rotate(-1deg);z-index:4;" />
-        <img src="media/image50.jpeg" alt="壁纸" title="壁纸统一：看着舒服" style="right:6%;bottom:4%;width:26%;max-height:130px;transform:rotate(2deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image64.jpg" alt="Lenovo T61 · Xubuntu" title="ThinkPad T61 装上 Xubuntu，老机器也有新桌面" style="left:1%;top:1%;width:34%;max-height:230px;transform:rotate(-2deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image63.jpg" alt="Acer 传文件" title="红 Acer 与手机互传历史课音频" style="right:2%;top:0%;width:38%;max-height:210px;transform:rotate(2deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image67.jpg" alt="iPad 写代码" title="咖啡厅里用 iPad 写 NextWave" style="left:28%;top:16%;width:26%;max-height:280px;transform:rotate(1deg);z-index:6;" />
+        <img loading="lazy" decoding="async" src="media/image65.jpg" alt="强大的木瓜" title="蓝牙传送：强大的木瓜 #110" style="right:4%;top:28%;width:18%;max-height:240px;transform:rotate(-3deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image66.jpg" alt="Kali 安装" title="深夜给笔记本装 Kali Linux" style="left:2%;top:38%;width:20%;max-height:240px;transform:rotate(2deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image44.jpeg" alt="老 Acer" title="老 Acer 笔记本电脑" style="left:22%;top:48%;width:28%;max-height:160px;transform:rotate(-1deg);z-index:3;" />
+        <img loading="lazy" decoding="async" src="media/image46.jpeg" alt="fastboot" title="手机 fastboot 模式" style="right:22%;top:52%;width:18%;max-height:180px;transform:rotate(3deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image49.png" alt="slstatus" title="自定义 slstatus 状态栏" style="left:48%;top:42%;width:24%;max-height:140px;transform:rotate(-2deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image51.png" alt="纯 C" title="纯 C 没有 obj · 程序练习" style="left:6%;bottom:4%;width:22%;max-height:150px;transform:rotate(1deg);z-index:5;" />
+        <img loading="lazy" decoding="async" src="media/image52.png" alt="NVIDIA" title="和 NVIDIA 大战三百回合" style="left:32%;bottom:6%;width:28%;max-height:120px;transform:rotate(-1deg);z-index:4;" />
+        <img loading="lazy" decoding="async" src="media/image50.jpeg" alt="壁纸" title="壁纸统一：看着舒服" style="right:6%;bottom:4%;width:26%;max-height:130px;transform:rotate(2deg);z-index:3;" />
       </div>
       <div class="anim anim-d4" style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem;justify-content:center;max-width:900px;margin:1.2rem auto 0;font-size:0.78rem;color:var(--text-muted);">
         <span>T61 · Xubuntu</span>
@@ -1252,26 +1267,30 @@
       <p class="label anim">水上竞技</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">桨板赛道上，拿下了第一名</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
-        夏天当然不能只有屏幕和代码。
+        夏天当然不能只有屏幕和代码。当然，也会掉进水里。
       </p>
-      <div class="stat-row anim anim-d3" style="margin:1.5rem 0;">
+      <div class="stat-row anim anim-d3" style="margin:1rem 0 1.2rem;">
         <div class="stat">
-          <img src="media/image53.png" alt="奖杯" style="width:48px;height:48px;margin:0 auto 0.5rem;" />
+          <img src="media/image53.png" alt="奖杯" class="icon" style="width:48px;height:48px;margin:0 auto 0.5rem;" />
           <div class="num" style="font-size:2rem;">第一名</div>
           <div class="desc">200 米竞速挑战赛</div>
         </div>
       </div>
-      <div class="gallery anim anim-d4" style="grid-template-columns:1fr 1fr;max-width:860px;gap:1.2rem;">
+      <div class="anim anim-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:980px;width:100%;align-items:start;">
         <div style="text-align:center;">
-          <img src="media/image55.jpeg" alt="赛前合影" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">赛前合影</p>
+          <img src="media/image55.jpeg" alt="赛前合影" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px;max-height:360px;object-fit:contain;margin:0 auto;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">赛前合影</p>
         </div>
         <div style="text-align:center;">
-          <img src="media/image56.jpeg" alt="获奖证书与奖牌" style="max-height:420px;width:auto;max-width:100%;object-fit:contain;" />
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">获奖证书与奖牌</p>
+          <video class="media-video" src="media/paddle-fall.mp4" controls playsinline preload="metadata" style="max-height:360px;"></video>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">训练时掉进水里 💦</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="media/image56.jpeg" alt="获奖证书与奖牌" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px;max-height:360px;object-fit:contain;margin:0 auto;" />
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">获奖证书与奖牌</p>
         </div>
       </div>
-      <p class="anim anim-d5" style="margin-top:1.5rem;font-style:italic;color:var(--text-muted);text-align:center;">
+      <p class="anim anim-d5" style="margin-top:1.2rem;font-style:italic;color:var(--text-muted);text-align:center;">
         从代码到桨板，动手和拼劲是一体两面的同一件事。
       </p>
     </section>
@@ -1293,7 +1312,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="关闭">×</button>
-    <img src="" alt="放大预览" id="lightboxImg" />
+    <img loading="lazy" decoding="async" src="" alt="放大预览" id="lightboxImg" />
   </div>
 
   <nav class="nav">
@@ -1320,6 +1339,7 @@
       progress.style.width = ((current + 1) / total * 100) + '%';
       pageNum.textContent = (current + 1) + ' / ' + total;
       if (current > 0) hint.classList.add('hidden');
+      if (typeof hydrateSlideImages === 'function') hydrateSlideImages(current);
     }
 
     document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
@@ -1371,26 +1391,37 @@
     }, { passive: true });
 
 
-    // Lightbox: click any content image to enlarge
+    // Lazy: only load nearby slides' images eagerly
+    function hydrateSlideImages(idx) {
+      for (let i = Math.max(0, idx - 1); i <= Math.min(total - 1, idx + 1); i++) {
+        slides[i].querySelectorAll('img[data-src]').forEach(img => {
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            delete img.dataset.src;
+          }
+        });
+      }
+    }
+
+    // Lightbox — reuse one img, no flash
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
 
     function openLightbox(src) {
-      lightboxImg.src = src;
+      if (lightboxImg.src !== src) lightboxImg.src = src;
       lightbox.classList.add('open');
     }
     function closeLightbox() {
       lightbox.classList.remove('open');
-      lightboxImg.src = '';
     }
 
-    document.querySelectorAll('.slide img').forEach(img => {
-      if (img.classList.contains('icon')) return;
-      img.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openLightbox(img.src);
-      });
+    // Event delegation — faster than binding every img
+    document.getElementById('deck').addEventListener('click', (e) => {
+      const img = e.target.closest('.slide img');
+      if (!img || img.classList.contains('icon')) return;
+      e.stopPropagation();
+      openLightbox(img.currentSrc || img.src);
     });
     lightboxClose.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1400,9 +1431,7 @@
       if (e.target === lightbox) closeLightbox();
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
-        closeLightbox();
-      }
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
     });
 
     // Init
