@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Enoch 木瓜的这个暑假 · Summer 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,6 +24,8 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    button, .nav { touch-action: manipulation; }
 
     html, body {
       height: 100%;
@@ -277,7 +279,44 @@
       margin-right: 0;
     }
     @media (max-width: 900px) {
-      .project { grid-template-columns: 1fr; gap: 1.5rem; }
+      .project {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+        max-width: 100%;
+      }
+      .project .label,
+      .project .title,
+      .project .subtitle,
+      .project .desc {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .project .bullets {
+        text-align: left;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .project .tags {
+        justify-content: center;
+      }
+      .project-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .browser-frame,
+      .browser-frame.live {
+        width: 100%;
+        max-width: 100%;
+      }
+      .browser-body.live-body {
+        height: min(42vh, 380px);
+      }
+      .phone-frame {
+        width: min(220px, 70vw);
+      }
     }
     .project-visual {
       display: flex;
@@ -631,10 +670,170 @@
 
     /* Responsive tweaks */
     @media (max-width: 600px) {
-      .slide { padding: 3vh 4vw; }
-      .stat-row { gap: 1rem; }
-      .card-grid { gap: 0.8rem; }
+      .slide {
+        padding: 2.5vh 4.5vw;
+        padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      }
+      .slide.scrollable {
+        padding-top: 3vh;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+        justify-content: flex-start;
+      }
+      .title {
+        font-size: clamp(1.45rem, 7vw, 2.1rem) !important;
+      }
+      .cover-title {
+        font-size: clamp(1.8rem, 9vw, 2.6rem);
+      }
+      .subtitle {
+        font-size: 0.92rem;
+        max-width: 100%;
+      }
+      .section-num {
+        font-size: clamp(3.5rem, 22vw, 5.5rem);
+        right: 3vw;
+        opacity: 0.06;
+      }
+      .stat-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem 0.6rem;
+        margin-top: 1.4rem;
+        width: 100%;
+        max-width: 360px;
+      }
+      .stat {
+        min-width: 0;
+      }
+      .stat .num {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      .stat .desc {
+        font-size: 0.72rem;
+      }
+      .card-grid {
+        gap: 0.7rem;
+        grid-template-columns: 1fr !important;
+      }
+      .card {
+        padding: 1rem 1.1rem;
+      }
+      .card h3 {
+        font-size: 0.95rem;
+      }
+      .nav {
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        padding: 8px 14px;
+        gap: 8px;
+        scale: 0.95;
+      }
+      .nav button {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+      }
+      .page-num {
+        font-size: 0.8rem;
+        min-width: 3.5rem;
+      }
+      .hint {
+        bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+        font-size: 0.75rem;
+        padding: 0 16px;
+        text-align: center;
+      }
+      .browser-chrome {
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      .browser-urlbar {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+      .browser-open {
+        padding: 3px 8px;
+        font-size: 10px;
+      }
+      .browser-body.live-body {
+        height: min(38vh, 320px);
+      }
+      .browser-body img {
+        max-height: 40vh;
+      }
+      .phone-frame {
+        width: min(200px, 58vw);
+        padding: 10px;
+        border-radius: 28px;
+      }
+      .phone-screen img {
+        max-height: 48vh;
+      }
+      .quote-box {
+        padding: 1rem 1.1rem;
+        margin-top: 1rem;
+      }
+      .quote-box p {
+        font-size: 0.9rem;
+      }
+      /* Collage → simple 2-col grid on mobile */
+      .collage {
+        position: relative !important;
+        min-height: 0 !important;
+        height: auto !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
+        max-width: 100%;
+      }
+      .collage img {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        max-height: 140px !important;
+        height: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        object-fit: cover;
+      }
+      /* Override common inline grids */
+      .gallery {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.7rem !important;
+        max-width: 100% !important;
+      }
+      .progress {
+        height: 3px;
+      }
     }
+
+    @media (max-width: 400px) {
+      .stat-row {
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
+      }
+      .collage img {
+        max-height: 110px !important;
+      }
+      .title {
+        font-size: clamp(1.3rem, 6.5vw, 1.8rem) !important;
+      }
+    }
+
+    /* Landscape phones */
+    @media (max-height: 480px) and (orientation: landscape) {
+      .slide {
+        padding: 2vh 4vw;
+        justify-content: flex-start;
+      }
+      .section-num { display: none; }
+      .browser-body.live-body { height: min(70vh, 280px); }
+      .stat-row { margin-top: 0.8rem; }
+      .nav { bottom: 8px; padding: 6px 12px; }
+    }
+
 
     /* Scrollable slides */
     .slide.scrollable {
@@ -1477,12 +1676,19 @@
 
     // Touch swipe
     let touchStartX = 0;
+    let touchStartY = 0;
     document.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
     document.addEventListener('touchend', (e) => {
+      if (lightbox && lightbox.classList.contains('open')) return;
+      // ignore swipes that start on iframe / video / interactive
+      const t = e.target;
+      if (t.closest && (t.closest('iframe') || t.closest('video') || t.closest('a') || t.closest('button'))) return;
       const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 60) {
+      const dy = e.changedTouches[0].screenY - touchStartY;
+      if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.2) {
         if (dx < 0) goTo(current + 1);
         else goTo(current - 1);
       }
