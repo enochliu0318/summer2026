@@ -278,6 +278,65 @@
       margin-left: 0;
       margin-right: 0;
     }
+
+    /* Page-specific / component helpers */
+    .fund-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 960px;
+      width: 100%;
+      margin: 2rem auto 0;
+    }
+    .paddle-prize {
+      text-align: center;
+      margin: 0.8rem auto 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .paddle-prize .icon {
+      width: 48px;
+      height: 48px;
+      margin: 0;
+    }
+    .paddle-prize .num {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    .paddle-prize .desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .tinker-captions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.85rem;
+      justify-content: center;
+      max-width: 900px;
+      margin: 1.2rem auto 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+      padding: 0 0.5rem;
+    }
+    .paddle-media {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      max-width: 980px;
+      width: 100%;
+      align-items: start;
+    }
+
     @media (max-width: 900px) {
       .project {
         grid-template-columns: 1fr;
@@ -316,6 +375,12 @@
       }
       .phone-frame {
         width: min(220px, 70vw);
+      }
+      .fund-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .paddle-media {
+        grid-template-columns: 1fr 1fr;
       }
     }
     .project-visual {
@@ -671,13 +736,22 @@
     /* Responsive tweaks */
     @media (max-width: 600px) {
       .slide {
-        padding: 2.5vh 4.5vw;
-        padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+        padding: calc(12px + env(safe-area-inset-top, 0px)) 4.5vw calc(88px + env(safe-area-inset-bottom, 0px));
+        justify-content: flex-start;
+        align-items: center;
       }
       .slide.scrollable {
-        padding-top: 3vh;
+        padding-top: calc(16px + env(safe-area-inset-top, 0px));
         padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
         justify-content: flex-start;
+      }
+      /* 标题页也从上往下排，避免顶部被裁 */
+      .slide:not(.scrollable) {
+        justify-content: flex-start;
+        padding-top: calc(20px + env(safe-area-inset-top, 0px));
+      }
+      .slide .label {
+        margin-top: 0.4rem;
       }
       .title {
         font-size: clamp(1.45rem, 7vw, 2.1rem) !important;
@@ -809,7 +883,59 @@
       }
     }
 
-    @media (max-width: 400px) {
+    
+      .fund-stats {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.7rem !important;
+        margin-top: 1.2rem !important;
+      }
+      .fund-stats .card {
+        padding: 1rem 0.6rem !important;
+      }
+      .fund-stats .num {
+        font-size: 1.55rem !important;
+      }
+      .fund-stats .desc {
+        font-size: 0.72rem !important;
+      }
+      .paddle-prize {
+        margin: 0.6rem auto 1rem;
+      }
+      .paddle-prize .num {
+        font-size: 1.75rem;
+      }
+      .paddle-media {
+        grid-template-columns: 1fr !important;
+        gap: 0.9rem !important;
+        max-width: 100% !important;
+      }
+      .paddle-media .media-video,
+      .paddle-media img {
+        max-height: 240px !important;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .tinker-captions {
+        font-size: 0.68rem;
+        gap: 0.2rem 0.45rem;
+        margin-top: 0.8rem;
+      }
+      /* 结束页 */
+      .end-slide {
+        justify-content: center !important;
+        padding-top: calc(24px + env(safe-area-inset-top, 0px)) !important;
+      }
+      .end-slide .title {
+        font-size: clamp(1.35rem, 6.5vw, 1.9rem) !important;
+        line-height: 1.35;
+        padding: 0 0.5rem;
+      }
+      .end-slide .heart {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+@media (max-width: 400px) {
       .stat-row {
         grid-template-columns: 1fr 1fr;
         max-width: 100%;
@@ -1457,7 +1583,7 @@
       <p class="subtitle anim anim-d2" style="max-width:680px;text-align:center;margin-left:auto;margin-right:auto;">
         负责寻找企业赞助、洽谈赞助权益，为选手补贴与硬件采购拉来真金白银的支持——整场活动能落地最实在的一环。
       </p>
-      <div class="anim anim-d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:960px;width:100%;margin:2rem auto 0;">
+      <div class="fund-stats anim anim-d3" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:960px;width:100%;margin:2rem auto 0;">
         <div class="card" style="text-align:center;padding:1.4rem 1rem;">
           <div class="num" style="font-size:2.2rem;">6</div>
           <div class="desc" style="margin-top:0.4rem;">档赞助权益<br/>(T1 ~ T6)</div>
@@ -1548,7 +1674,7 @@
         <img loading="lazy" decoding="async" src="media/image52.png" alt="NVIDIA" title="和 NVIDIA 大战三百回合" style="left:32%;bottom:6%;width:28%;max-height:120px;transform:rotate(-1deg);z-index:4;" />
         <img loading="lazy" decoding="async" src="media/image50.jpeg" alt="壁纸" title="壁纸统一：看着舒服" style="right:6%;bottom:4%;width:26%;max-height:130px;transform:rotate(2deg);z-index:3;" />
       </div>
-      <div class="anim anim-d4" style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem;justify-content:center;max-width:900px;margin:1.2rem auto 0;font-size:0.78rem;color:var(--text-muted);">
+      <div class="tinker-captions anim anim-d4">
         <span>T61 · Xubuntu</span>
         <span>·</span>
         <span>Acer 传文件</span>
@@ -1576,14 +1702,12 @@
       <p class="subtitle anim anim-d2" style="max-width:680px;">
         夏天当然不能只有屏幕和代码，没有掉进水里的夏天不太完整对吧。
       </p>
-      <div class="stat-row anim anim-d3" style="margin:1rem 0 1.2rem;">
-        <div class="stat">
-          <img src="media/image53.png" alt="奖杯" class="icon" style="width:48px;height:48px;margin:0 auto 0.5rem;" />
-          <div class="num" style="font-size:2rem;">第一名</div>
-          <div class="desc">200 米竞速挑战赛</div>
-        </div>
+      <div class="paddle-prize anim anim-d3">
+        <img src="media/image53.png" alt="奖杯" class="icon" />
+        <div class="num">第一名</div>
+        <div class="desc">200 米竞速挑战赛</div>
       </div>
-      <div class="anim anim-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:980px;width:100%;align-items:start;">
+      <div class="paddle-media anim anim-d4">
         <div style="text-align:center;">
           <video class="media-video" src="media/paddle-fall.mp4" controls playsinline preload="metadata" style="max-height:360px;"></video>
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">训练时掉进水里</p>
