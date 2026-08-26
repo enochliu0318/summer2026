@@ -47,14 +47,19 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: safe center;
       align-items: center;
       padding: 4vh 6vw;
       opacity: 0;
       visibility: hidden;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scroll-padding-top: 12px;
+      scroll-padding-bottom: 96px;
     }
 
     .slide.active {
@@ -180,6 +185,10 @@
     .mono { font-family: 'JetBrains Mono', monospace; }
 
     /* Cards */
+    .overview-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 2rem;
+    }
     .card-grid {
       display: grid;
       gap: 1.2rem;
@@ -287,6 +296,24 @@
       max-width: 960px;
       width: 100%;
       margin: 2rem auto 0;
+    }
+    .nameface-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      gap: 0.9rem;
+      max-width: 1100px;
+      width: 100%;
+      align-items: start;
+      margin-top: 0.5rem;
+    }
+    .nameface-gallery img {
+      max-height: 280px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
     }
     .paddle-prize {
       text-align: center;
@@ -736,22 +763,22 @@
     /* Responsive tweaks */
     @media (max-width: 600px) {
       .slide {
-        padding: calc(12px + env(safe-area-inset-top, 0px)) 4.5vw calc(88px + env(safe-area-inset-bottom, 0px));
-        justify-content: flex-start;
-        align-items: center;
+        padding: calc(14px + env(safe-area-inset-top, 0px)) 4.5vw calc(92px + env(safe-area-inset-bottom, 0px)) !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
       }
       .slide.scrollable {
-        padding-top: calc(16px + env(safe-area-inset-top, 0px));
-        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
-        justify-content: flex-start;
+        padding-top: calc(18px + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px)) !important;
+        justify-content: flex-start !important;
       }
-      /* 标题页也从上往下排，避免顶部被裁 */
       .slide:not(.scrollable) {
-        justify-content: flex-start;
-        padding-top: calc(20px + env(safe-area-inset-top, 0px));
+        justify-content: flex-start !important;
+        padding-top: calc(22px + env(safe-area-inset-top, 0px)) !important;
       }
       .slide .label {
-        margin-top: 0.4rem;
+        margin-top: 0.25rem;
+        flex-shrink: 0;
       }
       .title {
         font-size: clamp(1.45rem, 7vw, 2.1rem) !important;
@@ -785,7 +812,11 @@
       .stat .desc {
         font-size: 0.72rem;
       }
-      .card-grid {
+      .overview-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 2rem;
+    }
+    .card-grid {
         gap: 0.7rem;
         grid-template-columns: 1fr !important;
       }
@@ -898,7 +929,25 @@
       .fund-stats .desc {
         font-size: 0.72rem !important;
       }
-      .paddle-prize {
+      .nameface-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      gap: 0.9rem;
+      max-width: 1100px;
+      width: 100%;
+      align-items: start;
+      margin-top: 0.5rem;
+    }
+    .nameface-gallery img {
+      max-height: 280px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+    }
+    .paddle-prize {
         margin: 0.6rem auto 1rem;
       }
       .paddle-prize .num {
@@ -961,9 +1010,9 @@
     }
 
 
-    /* Scrollable slides */
+    /* Scrollable slides — safe center avoids clipping tall content */
     .slide.scrollable {
-      justify-content: center;
+      justify-content: safe center;
       align-items: center;
       padding-top: 4vh;
       padding-bottom: 100px;
@@ -1117,7 +1166,7 @@
       <p class="subtitle anim anim-d2">
         从写代码到搭网站，从建3D模型到划桨板，从组织黑客松、参加泉客松，到刷机美化、自建网络服务。
       </p>
-      <div class="card-grid anim anim-d3" style="grid-template-columns: repeat(3, 1fr); margin-top: 2.5rem;">
+      <div class="card-grid overview-grid anim anim-d3">
         <div class="card">
           <img class="icon" src="media/image1.png" alt="自主开发" />
           <h3>自主开发</h3>
@@ -1427,7 +1476,7 @@
         <span class="tag">WebSocket</span>
         <span class="tag">Rokid</span>
       </div>
-      <div class="gallery anim anim-d4" style="display:grid;grid-template-columns:1.15fr 0.85fr 0.85fr;gap:0.9rem;max-width:1100px;width:100%;align-items:start;">
+      <div class="gallery nameface-gallery anim anim-d4">
         <div style="text-align:center;">
           <img loading="lazy" decoding="async" src="media/image62.jpg" alt="开发现场" style="max-height:300px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;" />
           <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">赛场开发现场</p>
