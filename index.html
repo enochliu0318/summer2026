@@ -1308,11 +1308,11 @@
           <div class="desc">200 米竞速挑战赛</div>
         </div>
       </div>
-      <div style="text-align:center;">
+      <div class="anim anim-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:980px;width:100%;align-items:start;">
+        <div style="text-align:center;">
           <video class="media-video" src="media/paddle-fall.mp4" controls playsinline preload="metadata" style="max-height:360px;"></video>
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">训练时掉进水里</p>
         </div>
-      <div class="anim anim-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:980px;width:100%;align-items:start;">
         <div style="text-align:center;">
           <img src="media/image55.jpeg" alt="赛前合影" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px;max-height:360px;object-fit:contain;margin:0 auto;" />
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.45rem;line-height:1.3;">赛前合影</p>
@@ -1366,6 +1366,10 @@
       slides[current].classList.remove('active');
       current = index;
       slides[current].classList.add('active');
+      // pause any videos playing on other slides
+      document.querySelectorAll('.slide video').forEach(v => {
+        if (!v.closest('.slide').classList.contains('active')) v.pause();
+      });
       // reset scroll on scrollable slides
       slides[current].scrollTop = 0;
       progress.style.width = ((current + 1) / total * 100) + '%';
@@ -1380,6 +1384,8 @@
 
     document.addEventListener('keydown', (e) => {
       if (lightbox && lightbox.classList.contains('open')) return;
+      // don't hijack keys when user is interacting with media controls
+      if (e.target.closest && e.target.closest('video, audio, input, textarea, select')) return;
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         goTo(current + 1);
