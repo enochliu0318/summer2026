@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Enoch 木瓜的这个暑假 · Summer 2026</title>
+  <title>REPLACEME</title>
+  <script>
+  window.addEventListener('load',()=>setTimeout(()=>{
+    const ppr=document.querySelector('.paddle-prize');
+    const num=document.querySelector('.paddle-prize .num');
+    const icon=document.querySelector('.paddle-prize .icon');
+    document.title='PFD='+getComputedStyle(ppr).flexDirection+
+      ' | numTop='+Math.round(num.getBoundingClientRect().top)+
+      ' | iconTop='+Math.round(icon.getBoundingClientRect().top)+
+      ' | iconW='+icon.getBoundingClientRect().width;
+  },900));
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -1150,7 +1161,7 @@
   <div class="deck" id="deck">
 
     <!-- ========== SLIDE 1: Cover ========== -->
-    <section class="slide active" data-slide="0">
+    <section class="slide" data-slide="0">
       <div class="cover-bg"></div>
       <p class="label anim">S U M M E R &nbsp; 2 0 2 6</p>
       <h1 class="cover-title anim anim-d1">Enoch 木瓜的<br/><span>这个暑假</span></h1>
@@ -1763,7 +1774,7 @@
     </section>
 
     <!-- ========== 桨板竞速 ========== -->
-    <section class="slide scrollable" data-slide="18">
+    <section class="slide scrollable active" data-slide="18">
       <p class="label anim">水上竞技</p>
       <h2 class="title anim anim-d1" style="font-size:clamp(1.5rem,3.5vw,2.2rem);">桨板赛道上，拿下了第一名</h2>
       <p class="subtitle anim anim-d2" style="max-width:680px;">
@@ -1822,7 +1833,7 @@
   <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
     const total = slides.length;
-    let current = 0;
+    let current = 18;
     const progress = document.getElementById('progress');
     const pageNum = document.getElementById('pageNum');
     const hint = document.getElementById('hint');
